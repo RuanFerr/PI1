@@ -43,9 +43,10 @@ public class CadastroItem extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         cadPessoa = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        btna = new javax.swing.JButton();
+        regReserva = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(600, 400));
 
         jLabel1.setText("Nome do item");
 
@@ -105,12 +106,12 @@ public class CadastroItem extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Cadastrar Item");
+        jLabel5.setText("Cadastrar Equipamento");
 
-        btna.setText("jButton1");
-        btna.addActionListener(new java.awt.event.ActionListener() {
+        regReserva.setText("Registrar Reserva");
+        regReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnaActionPerformed(evt);
+                regReservaActionPerformed(evt);
             }
         });
 
@@ -119,53 +120,50 @@ public class CadastroItem extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(nomeItem, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                    .addComponent(descricao)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(btnAtualizar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btnDelete)
-                        .addGap(58, 58, 58)
-                        .addComponent(btna))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(numSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(marca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(cadPessoa)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 10, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(cadPessoa)
+                        .addGap(18, 18, 18)
+                        .addComponent(regReserva))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnAtualizar)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnDelete))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nomeItem)
+                            .addComponent(descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(marca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cadPessoa)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(regReserva))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -180,13 +178,12 @@ public class CadastroItem extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(numSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdicionar)
                     .addComponent(btnAtualizar)
-                    .addComponent(btnDelete)
-                    .addComponent(btna))
-                .addGap(27, 27, 27)
+                    .addComponent(btnDelete))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -199,8 +196,12 @@ public class CadastroItem extends javax.swing.JFrame {
         if (!testaCampos()) {
             DefaultTableModel dtmAdd = (DefaultTableModel) tabelaItem.getModel();
 
-            itens.add(new Item(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText())));
+            Item it = new Item(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText()));
+            
+            itens.add(it);
 
+            control.reserva.Item.getLogEquipamento().add(it);
+            
             Object[] tabela = {nomeItem.getText(), marca.getText(), descricao.getText(), numSerie.getText()};
             dtmAdd.addRow(tabela);
 
@@ -232,6 +233,7 @@ public class CadastroItem extends javax.swing.JFrame {
         if (tabelaItem.getSelectedRow() != -1) {
 
             Object[] opcoes = {"Confirmar", "Cancelar"};
+            
             if (JOptionPane.showOptionDialog(null, "Deleja alterar este registro?", "Alterar Registro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
 
                 DefaultTableModel dtmAlt = (DefaultTableModel) tabelaItem.getModel();
@@ -247,6 +249,7 @@ public class CadastroItem extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
 
                 limpaCampos();
+                
             } else {
             }
         } else {
@@ -268,6 +271,7 @@ public class CadastroItem extends javax.swing.JFrame {
                 dtmDel.removeRow(tabelaItem.getSelectedRow());
 
                 limpaCampos();
+                
             } else {
 
             }
@@ -284,11 +288,11 @@ public class CadastroItem extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cadPessoaActionPerformed
 
-    private void btnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaActionPerformed
+    private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
         Reserva res = new Reserva();
         res.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnaActionPerformed
+    }//GEN-LAST:event_regReservaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -362,7 +366,6 @@ public class CadastroItem extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btna;
     private javax.swing.JButton cadPessoa;
     private javax.swing.JTextField descricao;
     private javax.swing.JLabel jLabel1;
@@ -374,6 +377,7 @@ public class CadastroItem extends javax.swing.JFrame {
     private javax.swing.JTextField marca;
     private javax.swing.JTextField nomeItem;
     private javax.swing.JTextField numSerie;
+    private javax.swing.JButton regReserva;
     private javax.swing.JTable tabelaItem;
     // End of variables declaration//GEN-END:variables
 }

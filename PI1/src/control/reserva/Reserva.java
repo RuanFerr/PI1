@@ -10,7 +10,16 @@ public class Reserva {
     private String itemReserva;
     private String nomeResponsavel;
 
+    public static ArrayList<Reserva> getLogReservas() {
+        return logReservas;
+    }
+
+    public static void setLogReservas(ArrayList<Reserva> logReservas) {
+        Reserva.logReservas = logReservas;
+    }
+
     public Reserva() {
+        
     }
     
     public Reserva(String item, String dataHora, String nomeResponsavel){
@@ -102,9 +111,22 @@ public class Reserva {
         this.nomeResponsavel = nomeResponsavel;
     }
 
-    
+    public static boolean validarReserva(Reserva res){
+        
+        boolean aceito = true;
+        
+        for (int i = 0; i < reservas.size(); i++) {
+            if ( (res.dataHoraReserva.equals(reservas.get(i).dataHoraReserva)) && (res.itemReserva.equals(reservas.get(i).itemReserva))) {
+                aceito = false;
+            }
+        }
+        
+        return aceito;
+    }
     
     public static ArrayList<Reserva> reservas = new ArrayList();
+    
+    private static ArrayList<Reserva> logReservas = new ArrayList();
 
     private static String mes[] = {"mês", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"};
 

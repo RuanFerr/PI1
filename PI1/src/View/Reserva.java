@@ -8,10 +8,11 @@ package View;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import view.*;
+import view.CadastroItem;
 
 /**
  *
@@ -21,7 +22,6 @@ public class Reserva extends javax.swing.JFrame {
 
     public Reserva() {
         initComponents();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -41,6 +41,8 @@ public class Reserva extends javax.swing.JFrame {
         nomeResponsavel = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         regReserva = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,6 +106,16 @@ public class Reserva extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Registrar Reserva");
+
+        jButton1.setText("Cancelar reserva");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,38 +123,40 @@ public class Reserva extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addComponent(nomeResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(cxItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(regReserva)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cadPessoa)
-                        .addGap(58, 58, 58)
-                        .addComponent(cadEquip)))
-                .addGap(102, 102, 102))
+                                .addGap(46, 46, 46)
+                                .addComponent(regReserva))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cadEquip)
+                                .addGap(18, 18, 18)
+                                .addComponent(cadPessoa)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(87, 87, 87)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(78, 78, 78)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(cxItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +164,8 @@ public class Reserva extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cadPessoa)
-                    .addComponent(cadEquip))
+                    .addComponent(cadEquip)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,17 +174,16 @@ public class Reserva extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(cxItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nomeResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(regReserva)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomeResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(regReserva))
+                .addGap(19, 19, 19)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -190,9 +204,13 @@ public class Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_cadPessoaActionPerformed
 
     private void cadEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadEquipActionPerformed
-        view.CadastroItem cadastroItem = new CadastroItem();
-        cadastroItem.setVisible(true);
+
+        CadastroItem cadItem = new CadastroItem();
+        cadItem.setVisible(true);
         dispose();
+        
+        cadItem.addTab();
+        
     }//GEN-LAST:event_cadEquipActionPerformed
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
@@ -200,13 +218,54 @@ public class Reserva extends javax.swing.JFrame {
         String data = (btnDia.getSelectedItem() + " de " + btnMes.getSelectedItem());
         String item = (String) cxItem.getSelectedItem();
         
-        control.reserva.Reserva.reservas.add(new control.reserva.Reserva( item, data, nomeResponsavel.getText()));
+        control.reserva.Reserva res = new control.reserva.Reserva(item, data, nomeResponsavel.getText());
+        
+        if (control.reserva.Reserva.validarReserva(res)){
+            
+            control.reserva.Reserva.reservas.add(res);
+            
+            control.reserva.Reserva.getLogReservas().add(res);
 
         DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
         String[] row = {data, item, nomeResponsavel.getText()};
         dtm.addRow(row);
         
+            JOptionPane.showMessageDialog(null, "Reserva registrada com sucesso");
+            
+        } else {
+            
+            JOptionPane.showMessageDialog(null, "equipamento indisponível para reserva nessa data");
+            
+        }
+  
+        
     }//GEN-LAST:event_regReservaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+        if (tabelaReserva.getSelectedRow() != -1) {
+            
+            Object[] opcoes = {"Confirmar", "Cancelar"};
+            
+            if (JOptionPane.showOptionDialog(null, "Deseja cancelar esta reserva?", "Cancelar reserva", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0){
+            
+                control.reserva.Reserva.reservas.remove(tabelaReserva.getSelectedRow());
+                
+                DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
+                
+                dtm.removeRow(tabelaReserva.getSelectedRow());
+                
+                btnMes.setSelectedIndex(0);
+                nomeResponsavel.setText("");
+                btnDia.setSelectedIndex(0);
+                
+        }
+            
+        } else {
+            JOptionPane.showMessageDialog(null,"Selecione a ocorrência antes");
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public Reserva(JComboBox<String> btnMes, JScrollPane jScrollPane1, JTable tabelaReserva) throws HeadlessException {
         this.btnMes = btnMes;
@@ -272,10 +331,12 @@ public class Reserva extends javax.swing.JFrame {
     private javax.swing.JButton cadEquip;
     private javax.swing.JButton cadPessoa;
     private javax.swing.JComboBox<Object> cxItem;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeResponsavel;
     private javax.swing.JButton regReserva;

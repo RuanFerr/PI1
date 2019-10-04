@@ -1,11 +1,15 @@
 package control.reserva;
 
+import java.util.ArrayList;
+
 public class Item {
 
     private String nome;
     private String marca;
     private String descricao;
     private int numSerie;
+    
+    private static ArrayList<Item> logEquipamento = new ArrayList();
 
     public Item(String nome, String marca, String descricao, int numSerie) {
         this.nome = nome;
@@ -46,4 +50,8 @@ public class Item {
         this.numSerie = numSerie;
     }
 
+    public static ArrayList<Item> getLogEquipamento() {
+        return logEquipamento;
+    }
+    
 }

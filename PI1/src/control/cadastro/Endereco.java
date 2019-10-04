@@ -1,8 +1,7 @@
-
 package control.cadastro;
 
 public class Endereco {
-    
+
     private String rua;
     private String complemento;
     private String bairro;
@@ -10,6 +9,7 @@ public class Endereco {
     private String telefone;
     private String cep;
     private int numero;
+    private int cpf;
 
     public String getRua() {
         return rua;
@@ -69,5 +69,13 @@ public class Endereco {
 
     public Endereco() {
     }
-    
+
+    public int getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+
 }
