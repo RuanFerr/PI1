@@ -5,19 +5,19 @@
  */
 package view;
 
-import control.reserva.Item;
+import control.reserva.Equipamento;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import View.CadastroPessoa;
 import View.Reserva;
 
-public class CadastroItem extends javax.swing.JFrame {
+public class CadastroEquipamento extends javax.swing.JFrame {
 
-    public CadastroItem() {
+    public CadastroEquipamento() {
         initComponents();
     }
-    public static ArrayList<Item> itens = new ArrayList();
+    public static ArrayList<Equipamento> itens = new ArrayList();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -196,11 +196,11 @@ public class CadastroItem extends javax.swing.JFrame {
         if (!testaCampos()) {
             DefaultTableModel dtmAdd = (DefaultTableModel) tabelaItem.getModel();
 
-            Item it = new Item(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText()));
+            Equipamento it = new Equipamento(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText()));
             
             itens.add(it);
 
-            control.reserva.Item.getLogEquipamento().add(it);
+            control.reserva.Equipamento.getLogEquipamento().add(it);
             
             Object[] tabela = {nomeItem.getText(), marca.getText(), descricao.getText(), numSerie.getText()};
             dtmAdd.addRow(tabela);
@@ -230,6 +230,7 @@ public class CadastroItem extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaItemMouseClicked
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+       
         if (tabelaItem.getSelectedRow() != -1) {
 
             Object[] opcoes = {"Confirmar", "Cancelar"};
@@ -240,7 +241,7 @@ public class CadastroItem extends javax.swing.JFrame {
 
                 Object[] row = {nomeItem.getText(), marca.getText(), descricao.getText(), numSerie.getText()};
 
-                itens.set(tabelaItem.getSelectedRow(), new Item(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText())));
+                itens.set(tabelaItem.getSelectedRow(), new Equipamento(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText())));
 
                 for (int i = 0; i < dtmAlt.getColumnCount(); i++) {
 
@@ -308,21 +309,22 @@ public class CadastroItem extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEquipamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEquipamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEquipamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEquipamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CadastroItem cadastroItem = new CadastroItem();
+                CadastroEquipamento cadastroItem = new CadastroEquipamento();
                 cadastroItem.setVisible(true);
             }
         });

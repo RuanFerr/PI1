@@ -9,7 +9,7 @@ package View;
  *
  * @author Kelli
  */
-import view.CadastroItem;
+import view.CadastroEquipamento;
 
 import View.Reserva;
 import control.cadastro.Funcionario;
@@ -20,12 +20,9 @@ import javax.swing.JOptionPane;
 
 public class CadastroPessoa extends javax.swing.JFrame {
 
-    static ArrayList<Funcionario> func = new ArrayList();
 
-    static ArrayList<Gerente> ger = new ArrayList();
-
-    static ArrayList<Usuario> user = new ArrayList();
-
+    static ArrayList<Object> allP = new ArrayList();
+    
     public CadastroPessoa() {
 
         initComponents();
@@ -86,6 +83,11 @@ public class CadastroPessoa extends javax.swing.JFrame {
         });
 
         updatePessoa.setText("Atualizar");
+        updatePessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatePessoaActionPerformed(evt);
+            }
+        });
 
         deletePessoa.setText("Excluir");
 
@@ -210,7 +212,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
     private void cadEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadEquipActionPerformed
 
-        CadastroItem cadastroItem = new CadastroItem();
+        CadastroEquipamento cadastroItem = new CadastroEquipamento();
         cadastroItem.setVisible(true);
         this.dispose();
 
@@ -234,15 +236,19 @@ public class CadastroPessoa extends javax.swing.JFrame {
             switch (crg) {
 
                 case "funcionario":
-
-                    func.add(new Funcionario());
+                    
+                    allP.add(new Funcionario());
 
                     break;
                 case "gerente":
-                    ger.add(new Gerente());
+                    
+                    allP.add(new Gerente());
+                    
                     break;
                 case "usuario":
-                    user.add(new Usuario());
+                    
+                    allP.add(new Usuario());
+                    
                     break;
             }
         } else {
@@ -252,6 +258,12 @@ public class CadastroPessoa extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_addPessoaActionPerformed
+
+    private void updatePessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePessoaActionPerformed
+       
+        
+        
+    }//GEN-LAST:event_updatePessoaActionPerformed
 
     /**
      * @param args the command line arguments

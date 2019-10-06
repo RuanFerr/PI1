@@ -2,16 +2,16 @@ package control.reserva;
 
 import java.util.ArrayList;
 
-public class Item {
+public class Equipamento {
 
     private String nome;
     private String marca;
     private String descricao;
     private int numSerie;
     
-    private static ArrayList<Item> logEquipamento = new ArrayList();
+    private static ArrayList<Equipamento> logEquipamento = new ArrayList();
 
-    public Item(String nome, String marca, String descricao, int numSerie) {
+    public Equipamento(String nome, String marca, String descricao, int numSerie) {
         this.nome = nome;
         this.marca = marca;
         this.descricao = descricao;
@@ -50,7 +50,7 @@ public class Item {
         this.numSerie = numSerie;
     }
 
-    public static ArrayList<Item> getLogEquipamento() {
+    public static ArrayList<Equipamento> getLogEquipamento() {
         return logEquipamento;
     }
     

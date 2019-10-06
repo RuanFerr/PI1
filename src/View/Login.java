@@ -5,6 +5,7 @@
  */
 package view;
 
+import control.cadastro.Pessoa;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,9 +14,8 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+     static Pessoa pssLogada;
+
     public Login() {
         initComponents();
     }
@@ -66,7 +66,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(182, 182, 182))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(loginBtn)
-                        .addGap(252, 252, 252))))
+                        .addGap(245, 245, 245))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,20 +79,25 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(35, 35, 35)
                 .addComponent(loginBtn)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-       if (control.login.Login.login(email.getText(), String.valueOf(senha.getPassword()))) {
-           CadastroItem cadastroItem = new CadastroItem();
-           cadastroItem.setVisible(true);
-           dispose();
-       }
+
+        if (control.login.Login.login(email.getText(), String.valueOf(senha.getPassword()))) {
+
+            CadastroEquipamento cadastroItem = new CadastroEquipamento();
+            
+            cadastroItem.setVisible(true);
+            
+            dispose();
+        }
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**

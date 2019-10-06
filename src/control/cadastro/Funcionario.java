@@ -14,18 +14,6 @@ public class Funcionario extends Pessoa{
     public void deletarItem () {
      //parametro
     }
-    public void cadastrarUsuario () {
-    
-    }
-    public void alterarUsuario () {
-    //parametro
-    }
-    public void buscarUsuario () {
-     //parametro
-    }
-    public void deletarUsuario () {
-     //parametro
-    }
     public void cadastrarReserva () {
     
     }

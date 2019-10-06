@@ -1,14 +1,33 @@
 package control.reserva;
 
 import java.util.ArrayList;
-import view.CadastroItem;
+import view.CadastroEquipamento;
 
 public class Reserva {
 
     private int idReserva;
     private String dataHoraReserva;
-    private String itemReserva;
+    private Equipamento itemReserva;
     private String nomeResponsavel;
+    private long CpfResp;
+
+    public long getCpfResp() {
+        return CpfResp;
+    }
+
+    public void setCpfResp(long CpfResp) {
+        this.CpfResp = CpfResp;
+    }
+    
+    private Equipamento equipamento;
+
+    public Equipamento getEquipamento() {
+        return equipamento;
+    }
+
+    public void setEquipamento(Equipamento equipamento) {
+        this.equipamento = equipamento;
+    }
 
     public static ArrayList<Reserva> getLogReservas() {
         return logReservas;
@@ -19,13 +38,14 @@ public class Reserva {
     }
 
     public Reserva() {
-        
+
     }
-    
-    public Reserva(String item, String dataHora, String nomeResponsavel){
+
+    public Reserva(Equipamento item, String dataHora, String nomeResponsavel, long cpfResp) {
         this.dataHoraReserva = dataHora;
         this.itemReserva = item;
         this.nomeResponsavel = nomeResponsavel;
+        this.CpfResp = cpfResp;
     }
 
     public int getIdReserva() {
@@ -44,11 +64,11 @@ public class Reserva {
         this.dataHoraReserva = dataHoraReserva;
     }
 
-    public String getItemReserva() {
+    public Equipamento getItemReserva() {
         return itemReserva;
     }
 
-    public void setItemReserva(String itemReserva) {
+    public void setItemReserva(Equipamento itemReserva) {
         this.itemReserva = itemReserva;
     }
 
@@ -90,13 +110,13 @@ public class Reserva {
 
     public static String[] retornaNomeItem() {
 
-        final int asd = CadastroItem.itens.size();
+        final int asd = CadastroEquipamento.itens.size();
 
         String[] nomes = new String[asd];
 
-        for (int i = 0; i < CadastroItem.itens.size(); i++) {
+        for (int i = 0; i < CadastroEquipamento.itens.size(); i++) {
 
-            String b = CadastroItem.itens.get(i).getNome();
+            String b = CadastroEquipamento.itens.get(i).getNome();
 
             nomes[i] = b;
         }
@@ -111,21 +131,21 @@ public class Reserva {
         this.nomeResponsavel = nomeResponsavel;
     }
 
-    public static boolean validarReserva(Reserva res){
-        
+    public static boolean validarReserva(Reserva res) {
+
         boolean aceito = true;
-        
+
         for (int i = 0; i < reservas.size(); i++) {
-            if ( (res.dataHoraReserva.equals(reservas.get(i).dataHoraReserva)) && (res.itemReserva.equals(reservas.get(i).itemReserva))) {
+            if ((res.dataHoraReserva.equals(reservas.get(i).dataHoraReserva)) && (res.itemReserva.equals(reservas.get(i).itemReserva)) && (res.CpfResp == reservas.get(i).CpfResp)) {
                 aceito = false;
             }
         }
-        
+
         return aceito;
     }
-    
+
     public static ArrayList<Reserva> reservas = new ArrayList();
-    
+
     private static ArrayList<Reserva> logReservas = new ArrayList();
 
     private static String mes[] = {"mês", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"};
