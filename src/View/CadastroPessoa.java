@@ -14,15 +14,17 @@ import view.CadastroEquipamento;
 import View.Reserva;
 import control.cadastro.Funcionario;
 import control.cadastro.Gerente;
+import control.cadastro.Pessoa;
 import control.cadastro.Usuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.TabExpander;
 
 public class CadastroPessoa extends javax.swing.JFrame {
 
+    static ArrayList<Pessoa> allP = new ArrayList();
 
-    static ArrayList<Object> allP = new ArrayList();
-    
     public CadastroPessoa() {
 
         initComponents();
@@ -74,6 +76,11 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jLabel6.setText("Cargo");
 
         cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"cargo", "Gerente", "Funcionario", "Usuario"}));
+        cargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargoActionPerformed(evt);
+            }
+        });
 
         addPessoa.setText("Adicionar");
         addPessoa.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +97,11 @@ public class CadastroPessoa extends javax.swing.JFrame {
         });
 
         deletePessoa.setText("Excluir");
+        deletePessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePessoaActionPerformed(evt);
+            }
+        });
 
         cadEquip.setText("Cadastrar Equipamento");
         cadEquip.addActionListener(new java.awt.event.ActionListener() {
@@ -113,9 +125,22 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "nome", "sobrenome", "CPF", "Cargo", "Email"
+                "nome", "sobrenome", "CPF", "Cargo", "Email", "Senha"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabPessoaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabPessoa);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,9 +157,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -231,25 +254,73 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         if (preencherCampos()) {
 
+            DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
+
             String crg = (String) cargo.getSelectedItem();
 
             switch (crg) {
 
-                case "funcionario":
-                    
-                    allP.add(new Funcionario());
+                case "Funcionario":
+
+                    Funcionario funcad = new Funcionario();
+
+                    funcad.setNome(nome.getText());
+                    funcad.setSobrenome(sobrenome.getText());
+                    funcad.setCargo((String) cargo.getSelectedItem());
+                    funcad.setCpf(Integer.parseInt(cpf.getText()));
+                    funcad.setEmail(email.getText());
+                    funcad.setSenha(senha.getText());
+
+                    allP.add(funcad);
+
+                    String[] fun = {funcad.getNome(), funcad.getSobrenome(), ("" + funcad.getCpf()), funcad.getCargo(), funcad.getEmail(), funcad.getSenha()};
+
+                    dtm.addRow(fun);
 
                     break;
-                case "gerente":
-                    
-                    allP.add(new Gerente());
-                    
+
+                case "Gerente":
+
+                    Gerente gercad = new Gerente();
+
+                    gercad.setNome(nome.getText());
+                    gercad.setSobrenome(sobrenome.getText());
+                    gercad.setCargo((String) cargo.getSelectedItem());
+                    gercad.setCpf(Integer.parseInt(cpf.getText()));
+                    gercad.setEmail(email.getText());
+                    gercad.setSenha(senha.getText());
+
+                    allP.add(gercad);
+
+                    String[] ger = {gercad.getNome(), gercad.getSobrenome(), ("" + gercad.getCpf()), gercad.getCargo(), gercad.getEmail(), gercad.getSenha()};
+
+                    dtm.addRow(ger);
+
                     break;
-                case "usuario":
-                    
-                    allP.add(new Usuario());
-                    
+
+                case "Usuario":
+
+                    Usuario usucad = new Usuario();
+
+                    usucad.setNome(nome.getText());
+                    usucad.setSobrenome(sobrenome.getText());
+                    usucad.setCargo((String) cargo.getSelectedItem());
+                    usucad.setCpf(Integer.parseInt(cpf.getText()));
+                    usucad.setEmail(email.getText());
+                    usucad.setSenha(senha.getText());
+
+                    allP.add(usucad);
+
+                    String[] usu = {usucad.getNome(), usucad.getSobrenome(), ("" + usucad.getCpf()), usucad.getCargo(), usucad.getEmail(), usucad.getSenha()};
+
+                    dtm.addRow(usu);
+
                     break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+                    break;
+
             }
         } else {
 
@@ -260,10 +331,115 @@ public class CadastroPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_addPessoaActionPerformed
 
     private void updatePessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePessoaActionPerformed
-       
-        
-        
+
+        if (tabPessoa.getSelectedRow() != -1) {
+
+            Object[] opcoes = {"Confirmar", "Cancelar"};
+
+            if (JOptionPane.showOptionDialog(null, "Deleja alterar este registro?", "Alterar Registro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
+
+                Pessoa pessoa = new Pessoa();
+
+                switch ((String) cargo.getSelectedItem()) {
+                    case "Funcionario":
+
+                        pessoa = new Funcionario();
+
+                        pessoa.setNome(nome.getText());
+                        pessoa.setSobrenome(sobrenome.getText());
+                        pessoa.setCpf(Integer.parseInt(cpf.getText()));
+                        pessoa.setCargo((String) cargo.getSelectedItem());
+                        pessoa.setEmail(email.getText());
+                        pessoa.setSenha(senha.getText());
+
+                        break;
+                    case "Gerente":
+
+                        pessoa = new Gerente();
+
+                        pessoa.setNome(nome.getText());
+                        pessoa.setSobrenome(sobrenome.getText());
+                        pessoa.setCpf(Integer.parseInt(cpf.getText()));
+                        pessoa.setCargo((String) cargo.getSelectedItem());
+                        pessoa.setEmail(email.getText());
+                        pessoa.setSenha(senha.getText());
+
+                        break;
+
+                    case "Usuario":
+
+                        pessoa = new Usuario();
+
+                        pessoa.setNome(nome.getText());
+                        pessoa.setSobrenome(sobrenome.getText());
+                        pessoa.setCpf(Integer.parseInt(cpf.getText()));
+                        pessoa.setCargo((String) cargo.getSelectedItem());
+                        pessoa.setEmail(email.getText());
+                        pessoa.setSenha(senha.getText());
+
+                        break;
+
+                }
+
+                allP.set(tabPessoa.getSelectedRow(), pessoa);
+
+                String[] pssrow = {pessoa.getNome(), pessoa.getSobrenome(), ("" + pessoa.getCpf()), pessoa.getCargo(), pessoa.getEmail(), pessoa.getSenha()};
+
+                for (int i = 0; i < tabPessoa.getColumnCount(); i++) {
+
+                    tabPessoa.setValueAt(pssrow[i], tabPessoa.getSelectedRow(), i);
+
+                }
+
+            } else {
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione registro para alterar.");
+        }
+
     }//GEN-LAST:event_updatePessoaActionPerformed
+
+    private void tabPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPessoaMouseClicked
+        if (tabPessoa.getSelectedRow() != -1) {
+            nome.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 0));
+            sobrenome.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 1));
+
+            cpf.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 2));
+            cargo.setSelectedItem((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 3));
+
+            email.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 4));
+            senha.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 5));
+        } else {
+        }
+    }//GEN-LAST:event_tabPessoaMouseClicked
+
+    private void cargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cargoActionPerformed
+
+    private void deletePessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePessoaActionPerformed
+
+        if (tabPessoa.getSelectedRow() != -1) {
+
+            Object[] opcoes = {"Confirmar", "Cancelar"};
+
+            if (JOptionPane.showOptionDialog(null, "Deleja deletar este registro?", "Deletar Registro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
+
+                DefaultTableModel dtmDel = (DefaultTableModel) tabPessoa.getModel();
+
+                allP.remove(tabPessoa.getSelectedRow());
+
+                dtmDel.removeRow(tabPessoa.getSelectedRow());
+
+            } else {
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione Linha para deletar");
+        }
+
+    }//GEN-LAST:event_deletePessoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,9 +483,9 @@ public class CadastroPessoa extends javax.swing.JFrame {
         boolean email = !this.email.getText().equals("");
         boolean senha = !this.senha.getText().equals("");
         boolean cpf = !this.cpf.getText().equals("");
-        boolean cargo = !this.cargo.getSelectedItem().equals("");
+        boolean cargo = !this.cargo.getSelectedItem().equals("Cargo");
 
-        return (nome & sobrenome & email & senha & cpf & cargo);
+        return (nome && sobrenome && email && senha && cpf && cargo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
