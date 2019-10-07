@@ -197,11 +197,11 @@ public class CadastroEquipamento extends javax.swing.JFrame {
             DefaultTableModel dtmAdd = (DefaultTableModel) tabelaItem.getModel();
 
             Equipamento it = new Equipamento(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText()));
-            
+
             itens.add(it);
 
             control.reserva.Equipamento.getLogEquipamento().add(it);
-            
+
             Object[] tabela = {nomeItem.getText(), marca.getText(), descricao.getText(), numSerie.getText()};
             dtmAdd.addRow(tabela);
 
@@ -230,11 +230,11 @@ public class CadastroEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaItemMouseClicked
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-       
+
         if (tabelaItem.getSelectedRow() != -1) {
 
             Object[] opcoes = {"Confirmar", "Cancelar"};
-            
+
             if (JOptionPane.showOptionDialog(null, "Deleja alterar este registro?", "Alterar Registro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
 
                 DefaultTableModel dtmAlt = (DefaultTableModel) tabelaItem.getModel();
@@ -250,7 +250,7 @@ public class CadastroEquipamento extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
 
                 limpaCampos();
-                
+
             } else {
             }
         } else {
@@ -272,7 +272,7 @@ public class CadastroEquipamento extends javax.swing.JFrame {
                 dtmDel.removeRow(tabelaItem.getSelectedRow());
 
                 limpaCampos();
-                
+
             } else {
 
             }
@@ -287,12 +287,15 @@ public class CadastroEquipamento extends javax.swing.JFrame {
         cadastroPessoa.setVisible(true);
         dispose();
 
+        cadastroPessoa.addTab();
     }//GEN-LAST:event_cadPessoaActionPerformed
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
         Reserva res = new Reserva();
         res.setVisible(true);
         dispose();
+
+        res.addTab();
     }//GEN-LAST:event_regReservaActionPerformed
 
     public static void main(String args[]) {
@@ -347,22 +350,28 @@ public class CadastroEquipamento extends javax.swing.JFrame {
         return (cNome || cMarca || cDescricao || cNumSerie);
     }
 
+    public boolean testaData(String data) {
+
+        return true;
+    }
+
+    ;
+
     public void addTab() {
 
         if (!itens.isEmpty()) {
-            
+
             DefaultTableModel dtm = (DefaultTableModel) tabelaItem.getModel();
-            
+
             for (int j = 0; j < itens.size(); j++) {
-                
+
                 Object[] rw = {itens.get(j).getNome(), itens.get(j).getMarca(), itens.get(j).getDescricao(), itens.get(j).getNumSerie()};
                 dtm.addRow(rw);
-                
+
             }
         }
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;

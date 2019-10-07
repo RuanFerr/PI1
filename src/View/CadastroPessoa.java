@@ -23,8 +23,6 @@ import javax.swing.text.TabExpander;
 
 public class CadastroPessoa extends javax.swing.JFrame {
 
-    static ArrayList<Pessoa> allP = new ArrayList();
-
     public CadastroPessoa() {
 
         initComponents();
@@ -244,83 +242,96 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
 
-        Reserva reserva = new Reserva();
-        reserva.setVisible(true);
+        Reserva res = new Reserva();
+        res.setVisible(true);
         dispose();
 
+        res.addTab();
     }//GEN-LAST:event_regReservaActionPerformed
 
     private void addPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPessoaActionPerformed
 
-        if (preencherCampos()) {
+        if (testaCampos()) {
 
-            DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
+            if (testeEmail()) {
 
-            String crg = (String) cargo.getSelectedItem();
+                DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
 
-            switch (crg) {
+                String crg = (String) cargo.getSelectedItem();
 
-                case "Funcionario":
+                switch (crg) {
 
-                    Funcionario funcad = new Funcionario();
+                    case "Funcionario":
 
-                    funcad.setNome(nome.getText());
-                    funcad.setSobrenome(sobrenome.getText());
-                    funcad.setCargo((String) cargo.getSelectedItem());
-                    funcad.setCpf(Integer.parseInt(cpf.getText()));
-                    funcad.setEmail(email.getText());
-                    funcad.setSenha(senha.getText());
+                        Funcionario funcad = new Funcionario();
 
-                    allP.add(funcad);
+                        funcad.setNome(nome.getText());
+                        funcad.setSobrenome(sobrenome.getText());
+                        funcad.setCargo((String) cargo.getSelectedItem());
+                        funcad.setCpf(Integer.parseInt(cpf.getText()));
+                        funcad.setEmail(email.getText());
+                        funcad.setSenha(senha.getText());
 
-                    String[] fun = {funcad.getNome(), funcad.getSobrenome(), ("" + funcad.getCpf()), funcad.getCargo(), funcad.getEmail(), funcad.getSenha()};
+                        control.login.Login.getGrpPessoa().add(funcad);
 
-                    dtm.addRow(fun);
+                        String[] fun = {funcad.getNome(), funcad.getSobrenome(), ("" + funcad.getCpf()), funcad.getCargo(), funcad.getEmail(), funcad.getSenha()};
 
-                    break;
+                        dtm.addRow(fun);
 
-                case "Gerente":
+                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                        limpaCampos();
+                        break;
 
-                    Gerente gercad = new Gerente();
+                    case "Gerente":
 
-                    gercad.setNome(nome.getText());
-                    gercad.setSobrenome(sobrenome.getText());
-                    gercad.setCargo((String) cargo.getSelectedItem());
-                    gercad.setCpf(Integer.parseInt(cpf.getText()));
-                    gercad.setEmail(email.getText());
-                    gercad.setSenha(senha.getText());
+                        Gerente gercad = new Gerente();
 
-                    allP.add(gercad);
+                        gercad.setNome(nome.getText());
+                        gercad.setSobrenome(sobrenome.getText());
+                        gercad.setCargo((String) cargo.getSelectedItem());
+                        gercad.setCpf(Integer.parseInt(cpf.getText()));
+                        gercad.setEmail(email.getText());
+                        gercad.setSenha(senha.getText());
 
-                    String[] ger = {gercad.getNome(), gercad.getSobrenome(), ("" + gercad.getCpf()), gercad.getCargo(), gercad.getEmail(), gercad.getSenha()};
+                        control.login.Login.getGrpPessoa().add(gercad);
 
-                    dtm.addRow(ger);
+                        String[] ger = {gercad.getNome(), gercad.getSobrenome(), ("" + gercad.getCpf()), gercad.getCargo(), gercad.getEmail(), gercad.getSenha()};
 
-                    break;
+                        dtm.addRow(ger);
 
-                case "Usuario":
+                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                        limpaCampos();
+                        break;
 
-                    Usuario usucad = new Usuario();
+                    case "Usuario":
 
-                    usucad.setNome(nome.getText());
-                    usucad.setSobrenome(sobrenome.getText());
-                    usucad.setCargo((String) cargo.getSelectedItem());
-                    usucad.setCpf(Integer.parseInt(cpf.getText()));
-                    usucad.setEmail(email.getText());
-                    usucad.setSenha(senha.getText());
+                        Usuario usucad = new Usuario();
 
-                    allP.add(usucad);
+                        usucad.setNome(nome.getText());
+                        usucad.setSobrenome(sobrenome.getText());
+                        usucad.setCargo((String) cargo.getSelectedItem());
+                        usucad.setCpf(Integer.parseInt(cpf.getText()));
+                        usucad.setEmail(email.getText());
+                        usucad.setSenha(senha.getText());
 
-                    String[] usu = {usucad.getNome(), usucad.getSobrenome(), ("" + usucad.getCpf()), usucad.getCargo(), usucad.getEmail(), usucad.getSenha()};
+                        control.login.Login.getGrpPessoa().add(usucad);
 
-                    dtm.addRow(usu);
+                        String[] usu = {usucad.getNome(), usucad.getSobrenome(), ("" + usucad.getCpf()), usucad.getCargo(), usucad.getEmail(), usucad.getSenha()};
 
-                    break;
+                        dtm.addRow(usu);
 
-                default:
-                    JOptionPane.showMessageDialog(null, "Preencha todos os campos");
-                    break;
+                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                        limpaCampos();
+                        break;
 
+                    default:
+                        JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+                        break;
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Email já cadastrado");
             }
         } else {
 
@@ -381,7 +392,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
                 }
 
-                allP.set(tabPessoa.getSelectedRow(), pessoa);
+                control.login.Login.getGrpPessoa().set(tabPessoa.getSelectedRow(), pessoa);
 
                 String[] pssrow = {pessoa.getNome(), pessoa.getSobrenome(), ("" + pessoa.getCpf()), pessoa.getCargo(), pessoa.getEmail(), pessoa.getSenha()};
 
@@ -401,11 +412,13 @@ public class CadastroPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_updatePessoaActionPerformed
 
     private void tabPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPessoaMouseClicked
+
         if (tabPessoa.getSelectedRow() != -1) {
             nome.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 0));
             sobrenome.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 1));
 
-            cpf.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 2));
+            cpf.setText("" + tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 2));
+
             cargo.setSelectedItem((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 3));
 
             email.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 4));
@@ -422,19 +435,27 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         if (tabPessoa.getSelectedRow() != -1) {
 
-            Object[] opcoes = {"Confirmar", "Cancelar"};
+            if (!control.login.Login.getGrpPessoa().get(tabPessoa.getSelectedRow()).equals(control.login.Login.getSessao())) {
 
-            if (JOptionPane.showOptionDialog(null, "Deleja deletar este registro?", "Deletar Registro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
+                Object[] opcoes = {"Confirmar", "Cancelar"};
 
-                DefaultTableModel dtmDel = (DefaultTableModel) tabPessoa.getModel();
+                if (JOptionPane.showOptionDialog(null, "Deleja deletar este registro?", "Deletar Registro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
 
-                allP.remove(tabPessoa.getSelectedRow());
+                    DefaultTableModel dtmDel = (DefaultTableModel) tabPessoa.getModel();
 
-                dtmDel.removeRow(tabPessoa.getSelectedRow());
+                    control.login.Login.getGrpPessoa().remove(tabPessoa.getSelectedRow());
 
+                    dtmDel.removeRow(tabPessoa.getSelectedRow());
+
+                } else {
+
+                }
             } else {
 
+                JOptionPane.showConfirmDialog(null, "não pode deletar seu usuário");
+
             }
+
         } else {
             JOptionPane.showMessageDialog(null, "Selecione Linha para deletar");
         }
@@ -476,7 +497,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         });
     }
 
-    public boolean preencherCampos() {
+    public boolean testaCampos() {
 
         boolean nome = !this.nome.getText().equals("");
         boolean sobrenome = !this.sobrenome.getText().equals("");
@@ -486,6 +507,49 @@ public class CadastroPessoa extends javax.swing.JFrame {
         boolean cargo = !this.cargo.getSelectedItem().equals("Cargo");
 
         return (nome && sobrenome && email && senha && cpf && cargo);
+    }
+
+    public void limpaCampos() {
+        nome.setText("");
+        sobrenome.setText("");
+        email.setText("");
+        senha.setText("");
+        cpf.setText("");
+        cargo.setSelectedItem("Cargo");
+    }
+
+    private boolean testeEmail() {
+        boolean valEmail = true;
+
+        if (!control.login.Login.getGrpPessoa().isEmpty()) {
+
+            for (int i = 0; i < control.login.Login.getGrpPessoa().size(); i++) {
+
+                if (email.getText().equals(control.login.Login.getGrpPessoa().get(i).getEmail())) {
+                    valEmail = false;
+                }
+
+            }
+
+        }
+
+        return valEmail;
+
+    }
+
+    public void addTab() {
+
+        if (!control.login.Login.getGrpPessoa().isEmpty()) {
+
+            DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
+
+            for (int i = 0; i < control.login.Login.getGrpPessoa().size(); i++) {
+
+                Object[] rw = {control.login.Login.getGrpPessoa().get(i).getNome(), control.login.Login.getGrpPessoa().get(i).getSobrenome(), control.login.Login.getGrpPessoa().get(i).getCpf(), control.login.Login.getGrpPessoa().get(i).getCargo(), control.login.Login.getGrpPessoa().get(i).getEmail(), control.login.Login.getGrpPessoa().get(i).getSenha()};
+
+                dtm.addRow(rw);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

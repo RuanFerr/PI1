@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class Login {
 
-    private Pessoa pessoa;
+    private static ArrayList<Pessoa> grpPessoa = new ArrayList();
 
-    private ArrayList<Pessoa> grpPessoa = new ArrayList();
-    
     private static int indexLogin;
+
+    private static Pessoa sessao;
 
     public Login() {
 
@@ -34,39 +34,48 @@ public class Login {
 
     }
 
-    public static boolean newLogin() {
+    public static boolean newLogin(String login, String senha) {
 
-        Pessoa[] pss = {new Pessoa()};
-
-        return true;
-    }
-
-    public boolean pssAddFirst(String login, String senha) {
-
-        grpPessoa.add(new Pessoa());
+        if (grpPessoa.isEmpty()) {
+            grpPessoa.add(new Pessoa());
+        }
         grpPessoa.get(0).setEmail("teste@gmail.com");
         grpPessoa.get(0).setSenha("123456");
-        
-        
-
-        Pessoa p = new Pessoa();
+        grpPessoa.get(0).setCargo("Gerente");
+        grpPessoa.get(0).setNome("ADMIN");
 
         for (int i = 0; i < grpPessoa.size(); i++) {
 
             if (login.equals(grpPessoa.get(i).getEmail()) && senha.equals(grpPessoa.get(i).getSenha())) {
 
-                p = grpPessoa.get(i);
+                sessao = grpPessoa.get(i);
+
                 i = grpPessoa.size();
                 
                 JOptionPane.showMessageDialog(null, "Login Efetuado Com Sucesso");
-                
-                indexLogin = i;
-                
+
                 return true;
             }
         }
         JOptionPane.showMessageDialog(null, "Email ou senha incorretos");
         return false;
+
+    }
+
+    public static ArrayList<Pessoa> getGrpPessoa() {
+        return grpPessoa;
+    }
+
+    public static void setGrpPessoa(ArrayList<Pessoa> grpPessoa) {
+        Login.grpPessoa = grpPessoa;
+    }
+
+    public static Pessoa getSessao() {
+        return sessao;
+    }
+
+    public static void setSessao(Pessoa sessao) {
+        Login.sessao = sessao;
     }
 
 }

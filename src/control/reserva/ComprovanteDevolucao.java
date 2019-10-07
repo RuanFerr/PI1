@@ -7,7 +7,9 @@ public class ComprovanteDevolucao {
     private String nomeResponsavel;
     private Date DataDevolucao;
     private int horaDevolucao;
-
+    
+    
+    
     public String getNomeResponsavel() {
         return nomeResponsavel;
     }

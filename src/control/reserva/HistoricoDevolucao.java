@@ -12,16 +12,14 @@ import java.util.Date;
  * @author Kelli
  */
 public class HistoricoDevolucao {
-    
+
     private Reserva reserva;
     private String operacao;
     private Date dataOperacao;
     private String nomeFunc;
-    
-    
 
     public void listarDadosDevolucao() {
-        
+
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package View;
 
+import java.text.ParseException;
+
 /**
  *
  * @author Kelli
@@ -18,7 +20,7 @@ public class DetalheReserva extends javax.swing.JFrame {
         initComponents();
     }
 
-    public DetalheReserva( control.reserva.Reserva res ){
+    public DetalheReserva( control.reserva.Reserva res ) throws ParseException{
         
         initComponents();
         
@@ -32,6 +34,10 @@ public class DetalheReserva extends javax.swing.JFrame {
         labNomePess.setText(res.getNomeResponsavel());
         
         labCpfPess.setText("" + res.getCpfResp());
+        
+        labDataReserva.setText(res.getDataHoraReserva());
+        
+        labSituacao.setText(control.reserva.Reserva.verSituacao(res.getDataHoraReserva()));
         
     }
     
@@ -59,6 +65,11 @@ public class DetalheReserva extends javax.swing.JFrame {
         labNomePess = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         labCpfPess = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        labDataReserva = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        labSituacao = new javax.swing.JLabel();
 
         jLabel9.setText("jLabel9");
 
@@ -67,25 +78,25 @@ public class DetalheReserva extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipamento"));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Nome");
+        jLabel1.setText("Nome:");
 
         labNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labNome.setText("nome");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Marca");
+        jLabel3.setText("Marca:");
 
         labMarca.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labMarca.setText("marca");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("Descricao");
+        jLabel5.setText("Descricao:");
 
         labDescricao.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labDescricao.setText("descricao");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setText("numero de serie");
+        jLabel7.setText("numero de serie:");
 
         labNumSerie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labNumSerie.setText("numserie");
@@ -136,11 +147,11 @@ public class DetalheReserva extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa"));
 
-        jLabel2.setText("Nome");
+        jLabel2.setText("Nome:");
 
         labNomePess.setText("nomePess");
 
-        jLabel10.setText("CPF");
+        jLabel10.setText("CPF:");
 
         labCpfPess.setText("CPF");
 
@@ -173,6 +184,43 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Status"));
+
+        jLabel4.setText("Reservado para: ");
+
+        labDataReserva.setText("dataReserva");
+
+        jLabel6.setText("Situação: ");
+
+        labSituacao.setText("situacao");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(labSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(labDataReserva)
+                    .addComponent(jLabel6)
+                    .addComponent(labSituacao))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,7 +229,8 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -191,7 +240,9 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,16 +288,21 @@ public class DetalheReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel labCpfPess;
+    private javax.swing.JLabel labDataReserva;
     private javax.swing.JLabel labDescricao;
     private javax.swing.JLabel labMarca;
     private javax.swing.JLabel labNome;
     private javax.swing.JLabel labNomePess;
     private javax.swing.JLabel labNumSerie;
+    private javax.swing.JLabel labSituacao;
     // End of variables declaration//GEN-END:variables
 }
