@@ -5,6 +5,7 @@
  */
 package control.reserva;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -17,9 +18,69 @@ public class HistoricoDevolucao {
     private String operacao;
     private Date dataOperacao;
     private String nomeFunc;
+    
+    public HistoricoDevolucao(){
+    }
+    
+    public HistoricoDevolucao(Reserva reserva, String operacao, Date dataOperacao, String nomeFunc){
+        
+        this.reserva = reserva;
+        this.nomeFunc = nomeFunc;
+        this.dataOperacao = dataOperacao;
+        this.operacao = operacao;
+        
+    }
+    
+    private static ArrayList<HistoricoDevolucao> historicoDevolucao;
 
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
+
+    public String getOperacao() {
+        return operacao;
+    }
+
+    public void setOperacao(String operacao) {
+        this.operacao = operacao;
+    }
+
+    public Date getDataOperacao() {
+        return dataOperacao;
+    }
+
+    public void setDataOperacao(Date dataOperacao) {
+        this.dataOperacao = dataOperacao;
+    }
+
+    public String getNomeFunc() {
+        return nomeFunc;
+    }
+
+    public void setNomeFunc(String nomeFunc) {
+        this.nomeFunc = nomeFunc;
+    }
+
+    public static ArrayList<HistoricoDevolucao> getHistoricoDevolucao() {
+        return historicoDevolucao;
+    }
+
+    public static void setHistoricoDevolucao(ArrayList<HistoricoDevolucao> historicoDevolucao) {
+        HistoricoDevolucao.historicoDevolucao = historicoDevolucao;
+    }
+
+    public static void registrarDevolucao(Reserva res){
+        
+        historicoDevolucao.add(new HistoricoDevolucao());
+        
+    }
+    
     public void listarDadosDevolucao() {
-
+        
     }
 
 }
