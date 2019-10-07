@@ -8,6 +8,7 @@ package View;
 import control.reserva.HistoricoDevolucao;
 import java.text.ParseException;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,30 +22,31 @@ public class DetalheReserva extends javax.swing.JFrame {
     public DetalheReserva() {
         initComponents();
     }
+    control.reserva.Reserva res;
 
-    public DetalheReserva( control.reserva.Reserva res ) throws ParseException{
-        
+    public DetalheReserva(control.reserva.Reserva res) throws ParseException {
+
         initComponents();
-        
+
         this.res = res;
-        
+
         String a = "" + res.getItemReserva().getNumSerie();
-        
+
         labNome.setText(res.getItemReserva().getNome());
         labMarca.setText(res.getItemReserva().getMarca());
         labDescricao.setText(res.getItemReserva().getDescricao());
         labNumSerie.setText(a);
-        
+
         labNomePess.setText(res.getNomeResponsavel());
-        
+
         labCpfPess.setText("" + res.getCpfResp());
-        
+
         labDataReserva.setText(res.getDataHoraReserva());
-        
+
         labSituacao.setText(control.reserva.Reserva.verSituacao(res.getDataHoraReserva()));
-        
+
     }
-    control.reserva.Reserva res;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,7 +76,6 @@ public class DetalheReserva extends javax.swing.JFrame {
         labDataReserva = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         labSituacao = new javax.swing.JLabel();
-        regDevolucao = new javax.swing.JButton();
 
         jLabel9.setText("jLabel9");
 
@@ -226,13 +227,6 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        regDevolucao.setText("Registrar Devolução");
-        regDevolucao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                regDevolucaoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,10 +238,6 @@ public class DetalheReserva extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(219, 219, 219)
-                .addComponent(regDevolucao)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,19 +248,11 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(regDevolucao)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void regDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regDevolucaoActionPerformed
-        
-        control.reserva.HistoricoDevolucao.getHistoricoDevolucao().add(new HistoricoDevolucao(res, "Devolucao", new Date(), control.login.Login.getSessao().getNome() + control.login.Login.getSessao().getSobrenome()));
-        
-    }//GEN-LAST:event_regDevolucaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,6 +310,5 @@ public class DetalheReserva extends javax.swing.JFrame {
     private javax.swing.JLabel labNomePess;
     private javax.swing.JLabel labNumSerie;
     private javax.swing.JLabel labSituacao;
-    private javax.swing.JButton regDevolucao;
     // End of variables declaration//GEN-END:variables
 }
