@@ -244,83 +244,96 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
 
-        Reserva reserva = new Reserva();
-        reserva.setVisible(true);
+        Reserva res = new Reserva();
+        res.setVisible(true);
         dispose();
 
+        res.addTab();
     }//GEN-LAST:event_regReservaActionPerformed
 
     private void addPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPessoaActionPerformed
 
-        if (preencherCampos()) {
+        if (testaCampos()) {
 
-            DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
+            if (testeEmail()) {
 
-            String crg = (String) cargo.getSelectedItem();
+                DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
 
-            switch (crg) {
+                String crg = (String) cargo.getSelectedItem();
 
-                case "Funcionario":
+                switch (crg) {
 
-                    Funcionario funcad = new Funcionario();
+                    case "Funcionario":
 
-                    funcad.setNome(nome.getText());
-                    funcad.setSobrenome(sobrenome.getText());
-                    funcad.setCargo((String) cargo.getSelectedItem());
-                    funcad.setCpf(Integer.parseInt(cpf.getText()));
-                    funcad.setEmail(email.getText());
-                    funcad.setSenha(senha.getText());
+                        Funcionario funcad = new Funcionario();
 
-                    allP.add(funcad);
+                        funcad.setNome(nome.getText());
+                        funcad.setSobrenome(sobrenome.getText());
+                        funcad.setCargo((String) cargo.getSelectedItem());
+                        funcad.setCpf(Integer.parseInt(cpf.getText()));
+                        funcad.setEmail(email.getText());
+                        funcad.setSenha(senha.getText());
 
-                    String[] fun = {funcad.getNome(), funcad.getSobrenome(), ("" + funcad.getCpf()), funcad.getCargo(), funcad.getEmail(), funcad.getSenha()};
+                        allP.add(funcad);
 
-                    dtm.addRow(fun);
+                        String[] fun = {funcad.getNome(), funcad.getSobrenome(), ("" + funcad.getCpf()), funcad.getCargo(), funcad.getEmail(), funcad.getSenha()};
 
-                    break;
+                        dtm.addRow(fun);
 
-                case "Gerente":
+                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                        limpaCampos();
+                        break;
 
-                    Gerente gercad = new Gerente();
+                    case "Gerente":
 
-                    gercad.setNome(nome.getText());
-                    gercad.setSobrenome(sobrenome.getText());
-                    gercad.setCargo((String) cargo.getSelectedItem());
-                    gercad.setCpf(Integer.parseInt(cpf.getText()));
-                    gercad.setEmail(email.getText());
-                    gercad.setSenha(senha.getText());
+                        Gerente gercad = new Gerente();
 
-                    allP.add(gercad);
+                        gercad.setNome(nome.getText());
+                        gercad.setSobrenome(sobrenome.getText());
+                        gercad.setCargo((String) cargo.getSelectedItem());
+                        gercad.setCpf(Integer.parseInt(cpf.getText()));
+                        gercad.setEmail(email.getText());
+                        gercad.setSenha(senha.getText());
 
-                    String[] ger = {gercad.getNome(), gercad.getSobrenome(), ("" + gercad.getCpf()), gercad.getCargo(), gercad.getEmail(), gercad.getSenha()};
+                        allP.add(gercad);
 
-                    dtm.addRow(ger);
+                        String[] ger = {gercad.getNome(), gercad.getSobrenome(), ("" + gercad.getCpf()), gercad.getCargo(), gercad.getEmail(), gercad.getSenha()};
 
-                    break;
+                        dtm.addRow(ger);
 
-                case "Usuario":
+                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                        limpaCampos();
+                        break;
 
-                    Usuario usucad = new Usuario();
+                    case "Usuario":
 
-                    usucad.setNome(nome.getText());
-                    usucad.setSobrenome(sobrenome.getText());
-                    usucad.setCargo((String) cargo.getSelectedItem());
-                    usucad.setCpf(Integer.parseInt(cpf.getText()));
-                    usucad.setEmail(email.getText());
-                    usucad.setSenha(senha.getText());
+                        Usuario usucad = new Usuario();
 
-                    allP.add(usucad);
+                        usucad.setNome(nome.getText());
+                        usucad.setSobrenome(sobrenome.getText());
+                        usucad.setCargo((String) cargo.getSelectedItem());
+                        usucad.setCpf(Integer.parseInt(cpf.getText()));
+                        usucad.setEmail(email.getText());
+                        usucad.setSenha(senha.getText());
 
-                    String[] usu = {usucad.getNome(), usucad.getSobrenome(), ("" + usucad.getCpf()), usucad.getCargo(), usucad.getEmail(), usucad.getSenha()};
+                        allP.add(usucad);
 
-                    dtm.addRow(usu);
+                        String[] usu = {usucad.getNome(), usucad.getSobrenome(), ("" + usucad.getCpf()), usucad.getCargo(), usucad.getEmail(), usucad.getSenha()};
 
-                    break;
+                        dtm.addRow(usu);
 
-                default:
-                    JOptionPane.showMessageDialog(null, "Preencha todos os campos");
-                    break;
+                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                        limpaCampos();
+                        break;
 
+                    default:
+                        JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+                        break;
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Email já cadastrado");
             }
         } else {
 
@@ -476,7 +489,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         });
     }
 
-    public boolean preencherCampos() {
+    public boolean testaCampos() {
 
         boolean nome = !this.nome.getText().equals("");
         boolean sobrenome = !this.sobrenome.getText().equals("");
@@ -486,6 +499,49 @@ public class CadastroPessoa extends javax.swing.JFrame {
         boolean cargo = !this.cargo.getSelectedItem().equals("Cargo");
 
         return (nome && sobrenome && email && senha && cpf && cargo);
+    }
+
+    public void limpaCampos() {
+        nome.setText("");
+        sobrenome.setText("");
+        email.setText("");
+        senha.setText("");
+        cpf.setText("");
+        cargo.setSelectedItem("Cargo");
+    }
+
+    private boolean testeEmail() {
+        boolean valEmail = true;
+
+        if (!allP.isEmpty()) {
+
+            for (int i = 0; i < allP.size(); i++) {
+
+                if (email.getText().equals(allP.get(i).getEmail())) {
+                    valEmail = false;
+                }
+
+            }
+
+        }
+
+        return valEmail;
+
+    }
+
+    public void addTab() {
+
+        if (!allP.isEmpty()) {
+
+            DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
+
+            for (int i = 0; i < allP.size(); i++) {
+
+                Object[] rw = {allP.get(i).getNome(), allP.get(i).getSobrenome(), allP.get(i).getCpf(), allP.get(i).getCargo(), allP.get(i).getEmail(), allP.get(i).getSenha()};
+
+                dtm.addRow(rw);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
