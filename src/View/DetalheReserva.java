@@ -5,7 +5,7 @@
  */
 package View;
 
-import control.reserva.HistoricoDevolucao;
+import control.reserva.*;
 import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -76,6 +76,7 @@ public class DetalheReserva extends javax.swing.JFrame {
         labDataReserva = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         labSituacao = new javax.swing.JLabel();
+        btnDevolucao = new javax.swing.JButton();
 
         jLabel9.setText("jLabel9");
 
@@ -227,6 +228,13 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnDevolucao.setText("registrar devolucao");
+        btnDevolucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolucaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -238,6 +246,10 @@ public class DetalheReserva extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(237, 237, 237)
+                .addComponent(btnDevolucao)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,17 +260,33 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(btnDevolucao)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucaoActionPerformed
+
+        HistoricoDevolucao hsD = new HistoricoDevolucao(res, "DEVOLUCAO", new Date(), (control.login.Login.getSessao().getNome() + " " + control.login.Login.getSessao().getSobrenome()));
+        
+        HistoricoDevolucao.getHistoricoDevolucao().add(hsD);
+        
+        control.reserva.Reserva.reservas.remove(hsD.getReserva());
+
+        JOptionPane.showMessageDialog(null, "Sucess!");
+        
+        
+
+    }//GEN-LAST:event_btnDevolucaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -290,6 +318,7 @@ public class DetalheReserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDevolucao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

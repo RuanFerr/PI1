@@ -33,7 +33,7 @@ public class HistoricoDevolucao {
 
     }
 
-    private static ArrayList<HistoricoDevolucao> historicoDevolucao;
+    private static ArrayList<HistoricoDevolucao> historicoDevolucao = new ArrayList();
 
     public Reserva getReserva() {
         return reserva;
