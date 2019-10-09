@@ -174,24 +174,39 @@ public class Reserva {
 
         return aceito;
     }
-   
+
     public static String verSituacao(String dataReserva) throws ParseException {
 
         Date datahj = new Date();
-                        
+
         Date dataRes = formatador.parse(dataReserva);
-        
+
         dataRes.setHours(23);
         dataRes.setMinutes(59);
-        
+
         if (datahj.after(dataRes)) {
-            
+
             return "Atrasado";
-            
+
         } else {
             return "Reservado";
         }
-    
+
+    }
+
+    public static boolean testarData(String dataRes) throws ParseException {
+        boolean resposta = true;
+        Date datahj = new Date();
+
+        Date dtRes = formatador.parse(dataRes);
+
+        dtRes.setHours(23);
+        dtRes.setMinutes(59);
+
+        if (dtRes.before(datahj)) {
+            resposta = false;
+        }
+        return resposta;
     }
 
     public static ArrayList<Reserva> reservas = new ArrayList();

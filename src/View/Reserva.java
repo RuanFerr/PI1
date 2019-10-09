@@ -279,67 +279,75 @@ public class Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_cadEquipActionPerformed
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
-        if (testaCampos()) {
+        try {
+            if (testaCampos()) {
+                String data = (btnDia.getSelectedItem() + "/" + btnMes.getSelectedItem() + "/" + btnAno.getSelectedItem());
 
-            String data = (btnDia.getSelectedItem() + "/" + btnMes.getSelectedItem() + "/" + btnAno.getSelectedItem());
+                if (control.reserva.Reserva.testarData(data)) {
 
-            Equipamento equip = CadastroEquipamento.itens.get(cxItem.getSelectedIndex());
+                    Equipamento equip = CadastroEquipamento.itens.get(cxItem.getSelectedIndex());
 
-            String item = (String) cxItem.getSelectedItem();
+                    String item = (String) cxItem.getSelectedItem();
 
-            control.reserva.Reserva res = new control.reserva.Reserva(equip, data, nomeResponsavel.getText(), Long.parseLong(CpfResp.getText()));
+                    control.reserva.Reserva res = new control.reserva.Reserva(equip, data, nomeResponsavel.getText(), Long.parseLong(CpfResp.getText()));
 
-            if (control.reserva.Reserva.validarReserva(res)) {
+                    if (control.reserva.Reserva.validarReserva(res)) {
 
-                control.reserva.Reserva.reservas.add(res);
+                        control.reserva.Reserva.reservas.add(res);
 
-                control.reserva.Reserva.getLogReservas().add(res);
+                        control.reserva.Reserva.getLogReservas().add(res);
 
-                DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
-                String[] row = {data, item, nomeResponsavel.getText()};
-                dtm.addRow(row);
+                        DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
+                        String[] row = {data, item, nomeResponsavel.getText()};
+                        dtm.addRow(row);
 
-                JOptionPane.showMessageDialog(null, "Reserva registrada com sucesso");
+                        JOptionPane.showMessageDialog(null, "Reserva registrada com sucesso");
+
+                    } else {
+
+                        JOptionPane.showMessageDialog(null, "equipamento indisponível para reserva nessa data");
+
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Data inválida. seleciona data após o dia de hoje");
+                }
 
             } else {
-
-                JOptionPane.showMessageDialog(null, "equipamento indisponível para reserva nessa data");
-
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na operação: " + ex);
         }
-
     }//GEN-LAST:event_regReservaActionPerformed
 
     private void cancelReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelReservaActionPerformed
 
         if (tabelaReserva.getSelectedRow() != -1) {
-            
+
             String dt = reservas.get(tabelaReserva.getSelectedRow()).getDataHoraReserva();
 
             try {
                 if (control.reserva.Reserva.verSituacao(dt) != "Atrasado") {
-                    
+
                     Object[] opcoes = {"Confirmar", "Cancelar"};
-                    
+
                     if (JOptionPane.showOptionDialog(null, "Deseja cancelar esta reserva?", "Cancelar reserva", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
-                        
+
                         control.reserva.Reserva.reservas.remove(tabelaReserva.getSelectedRow());
-                        
+
                         DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
-                        
+
                         dtm.removeRow(tabelaReserva.getSelectedRow());
-                        
+
                         btnMes.setSelectedIndex(0);
                         nomeResponsavel.setText("");
                         btnDia.setSelectedIndex(0);
-                        
+
                     }
                 } else {
-                    
+
                     JOptionPane.showMessageDialog(null, "Reservas atrasadas não podem ser canceladas");
-                    
+
                 }
             } catch (ParseException ex) {
                 Logger.getLogger(Reserva.class.getName()).log(Level.SEVERE, null, ex);
