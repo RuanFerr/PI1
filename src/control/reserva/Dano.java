@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Kelli
  */
 public class Dano {
-    
+
     private String marca;
     private int numSerie;
     private String nomeEquip;
@@ -20,6 +20,15 @@ public class Dano {
     private String tipo;
     private Date data;
     private int hora;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMarca() {
         return marca;
@@ -76,6 +85,5 @@ public class Dano {
     public void setHora(int hora) {
         this.hora = hora;
     }
-    
-    
+
 }

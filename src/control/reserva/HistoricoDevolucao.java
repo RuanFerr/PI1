@@ -19,6 +19,7 @@ public class HistoricoDevolucao {
     private String operacao;
     private Date dataOperacao;
     private String nomeFunc;
+    private int id;
 
     public HistoricoDevolucao() {
 
@@ -73,6 +74,14 @@ public class HistoricoDevolucao {
 
     public static void setHistoricoDevolucao(ArrayList<HistoricoDevolucao> historicoDevolucao) {
         HistoricoDevolucao.historicoDevolucao = historicoDevolucao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public static boolean registrarDevolucao(Reserva res) {
