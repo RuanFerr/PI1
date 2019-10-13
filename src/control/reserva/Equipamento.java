@@ -8,17 +8,8 @@ public class Equipamento {
     private String marca;
     private String descricao;
     private int numSerie;
-    private int id;
     
     private static ArrayList<Equipamento> logEquipamento = new ArrayList();
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Equipamento(String nome, String marca, String descricao, int numSerie) {
         this.nome = nome;

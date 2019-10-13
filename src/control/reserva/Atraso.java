@@ -11,21 +11,12 @@ package control.reserva;
  */
 public class Atraso {
 
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void apresentarAtraso() {
     }
 
     public double calcularMultaAtraso() {
-
-        return 0;
+        
+        
+        return 0;        
     }
 }
