@@ -19,6 +19,7 @@ public class HistoricoDevolucao {
     private String operacao;
     private Date dataOperacao;
     private String nomeFunc;
+    private Dano dano;
 
     public HistoricoDevolucao() {
 
@@ -75,11 +76,19 @@ public class HistoricoDevolucao {
         HistoricoDevolucao.historicoDevolucao = historicoDevolucao;
     }
 
+    public Dano getDano() {
+        return dano;
+    }
+
+    public void setDano(Dano dano) {
+        this.dano = dano;
+    }
+
     public static boolean registrarDevolucao(Reserva res) {
 
         boolean resp = false;
 
-        historicoDevolucao.add(new HistoricoDevolucao(res, "Devolucao", new Date(), control.login.Login.getSessao().getNome() ));
+        historicoDevolucao.add(new HistoricoDevolucao(res, "Devolucao", new Date(), control.login.Login.getSessao().getNome()));
 
         for (int i = 0; i < Reserva.reservas.size(); i++) {
 

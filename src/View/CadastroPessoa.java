@@ -16,17 +16,15 @@ import control.cadastro.Funcionario;
 import control.cadastro.Gerente;
 import control.cadastro.Pessoa;
 import control.cadastro.Usuario;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.TabExpander;
 
 public class CadastroPessoa extends javax.swing.JFrame {
 
     public CadastroPessoa() {
 
         initComponents();
-
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -60,6 +58,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         tabPessoa = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Stardust - Manter Pessoas");
 
         jLabel1.setText("nome");
 
@@ -147,16 +146,15 @@ public class CadastroPessoa extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cadEquip)
+                .addComponent(cadEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(regReserva)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(regReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
@@ -170,26 +168,28 @@ public class CadastroPessoa extends javax.swing.JFrame {
                                 .addComponent(updatePessoa)
                                 .addGap(18, 18, 18)
                                 .addComponent(deletePessoa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(cpf)
-                                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(42, 110, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel2)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cpf)
+                                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(nome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(77, 77, 77)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sobrenome)
-                                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(sobrenome, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(senha, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -224,11 +224,12 @@ public class CadastroPessoa extends javax.swing.JFrame {
                     .addComponent(updatePessoa)
                     .addComponent(deletePessoa))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadEquipActionPerformed
@@ -242,11 +243,12 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
 
-        Reserva res = new Reserva();
-        res.setVisible(true);
+        Reserva regRes = new Reserva();
+        regRes.setVisible(true);
         dispose();
 
-        res.addTab();
+        regRes.resetTab();
+        
     }//GEN-LAST:event_regReservaActionPerformed
 
     private void addPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPessoaActionPerformed
@@ -255,81 +257,85 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
             if (testeEmail()) {
 
-                DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
+                if (testaCPF()) {
 
-                String crg = (String) cargo.getSelectedItem();
+                    DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
 
-                switch (crg) {
+                    String crg = (String) cargo.getSelectedItem();
 
-                    case "Funcionario":
+                    switch (crg) {
 
-                        Funcionario funcad = new Funcionario();
+                        case "Funcionario":
 
-                        funcad.setNome(nome.getText());
-                        funcad.setSobrenome(sobrenome.getText());
-                        funcad.setCargo((String) cargo.getSelectedItem());
-                        funcad.setCpf(Integer.parseInt(cpf.getText()));
-                        funcad.setEmail(email.getText());
-                        funcad.setSenha(senha.getText());
+                            Funcionario funcad = new Funcionario();
 
-                        control.login.Login.getGrpPessoa().add(funcad);
+                            funcad.setNome(nome.getText());
+                            funcad.setSobrenome(sobrenome.getText());
+                            funcad.setCargo((String) cargo.getSelectedItem());
+                            funcad.setCpf(Long.parseLong(cpf.getText()));
+                            funcad.setEmail(email.getText());
+                            funcad.setSenha(senha.getText());
 
-                        String[] fun = {funcad.getNome(), funcad.getSobrenome(), ("" + funcad.getCpf()), funcad.getCargo(), funcad.getEmail(), funcad.getSenha()};
+                            control.login.Login.getGrpPessoa().add(funcad);
 
-                        dtm.addRow(fun);
+                            String[] fun = {funcad.getNome(), funcad.getSobrenome(), ("" + funcad.getCpf()), funcad.getCargo(), funcad.getEmail(), funcad.getSenha()};
 
-                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
-                        limpaCampos();
-                        break;
+                            dtm.addRow(fun);
 
-                    case "Gerente":
+                            JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                            limpaCampos();
+                            break;
 
-                        Gerente gercad = new Gerente();
+                        case "Gerente":
 
-                        gercad.setNome(nome.getText());
-                        gercad.setSobrenome(sobrenome.getText());
-                        gercad.setCargo((String) cargo.getSelectedItem());
-                        gercad.setCpf(Integer.parseInt(cpf.getText()));
-                        gercad.setEmail(email.getText());
-                        gercad.setSenha(senha.getText());
+                            Gerente gercad = new Gerente();
 
-                        control.login.Login.getGrpPessoa().add(gercad);
+                            gercad.setNome(nome.getText());
+                            gercad.setSobrenome(sobrenome.getText());
+                            gercad.setCargo((String) cargo.getSelectedItem());
+                            gercad.setCpf(Long.parseLong(cpf.getText()));
+                            gercad.setEmail(email.getText());
+                            gercad.setSenha(senha.getText());
 
-                        String[] ger = {gercad.getNome(), gercad.getSobrenome(), ("" + gercad.getCpf()), gercad.getCargo(), gercad.getEmail(), gercad.getSenha()};
+                            control.login.Login.getGrpPessoa().add(gercad);
 
-                        dtm.addRow(ger);
+                            String[] ger = {gercad.getNome(), gercad.getSobrenome(), ("" + gercad.getCpf()), gercad.getCargo(), gercad.getEmail(), gercad.getSenha()};
 
-                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
-                        limpaCampos();
-                        break;
+                            dtm.addRow(ger);
 
-                    case "Usuario":
+                            JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                            limpaCampos();
+                            break;
 
-                        Usuario usucad = new Usuario();
+                        case "Usuario":
 
-                        usucad.setNome(nome.getText());
-                        usucad.setSobrenome(sobrenome.getText());
-                        usucad.setCargo((String) cargo.getSelectedItem());
-                        usucad.setCpf(Integer.parseInt(cpf.getText()));
-                        usucad.setEmail(email.getText());
-                        usucad.setSenha(senha.getText());
+                            Usuario usucad = new Usuario();
 
-                        control.login.Login.getGrpPessoa().add(usucad);
+                            usucad.setNome(nome.getText());
+                            usucad.setSobrenome(sobrenome.getText());
+                            usucad.setCargo((String) cargo.getSelectedItem());
+                            usucad.setCpf(Long.parseLong(cpf.getText()));
+                            usucad.setEmail(email.getText());
+                            usucad.setSenha(senha.getText());
 
-                        String[] usu = {usucad.getNome(), usucad.getSobrenome(), ("" + usucad.getCpf()), usucad.getCargo(), usucad.getEmail(), usucad.getSenha()};
+                            control.login.Login.getGrpPessoa().add(usucad);
 
-                        dtm.addRow(usu);
+                            String[] usu = {usucad.getNome(), usucad.getSobrenome(), ("" + usucad.getCpf()), usucad.getCargo(), usucad.getEmail(), usucad.getSenha()};
 
-                        JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
-                        limpaCampos();
-                        break;
+                            dtm.addRow(usu);
 
-                    default:
-                        JOptionPane.showMessageDialog(null, "Preencha todos os campos");
-                        break;
+                            JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                            limpaCampos();
+                            break;
 
+                        default:
+                            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+                            break;
+
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "CPF digitado é incorretamente");
                 }
-
             } else {
                 JOptionPane.showMessageDialog(null, "Email já cadastrado");
             }
@@ -423,6 +429,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
             email.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 4));
             senha.setText((String) tabPessoa.getValueAt(tabPessoa.getSelectedRow(), 5));
+
         } else {
         }
     }//GEN-LAST:event_tabPessoaMouseClicked
@@ -537,18 +544,37 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
     }
 
+    public boolean testaCPF() {
+
+        boolean test;
+        try {
+            long num = Long.parseLong(cpf.getText());
+            
+            test = true;
+            System.out.println(cpf.getText().length());
+            if (cpf.getText().length() != 11) {
+                test = false;
+            }
+
+        } catch (NumberFormatException e) {
+            test = false;
+        }
+        return test;
+
+    }
+
     public void addTab() {
 
-        if (!control.login.Login.getGrpPessoa().isEmpty()) {
+        DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
 
-            DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
+        dtm.setNumRows(0);
 
-            for (int i = 0; i < control.login.Login.getGrpPessoa().size(); i++) {
+        for (int i = 0; i < control.login.Login.getGrpPessoa().size(); i++) {
 
-                Object[] rw = {control.login.Login.getGrpPessoa().get(i).getNome(), control.login.Login.getGrpPessoa().get(i).getSobrenome(), control.login.Login.getGrpPessoa().get(i).getCpf(), control.login.Login.getGrpPessoa().get(i).getCargo(), control.login.Login.getGrpPessoa().get(i).getEmail(), control.login.Login.getGrpPessoa().get(i).getSenha()};
+            Object[] rw = {control.login.Login.getGrpPessoa().get(i).getNome(), control.login.Login.getGrpPessoa().get(i).getSobrenome(), control.login.Login.getGrpPessoa().get(i).getCpf(), control.login.Login.getGrpPessoa().get(i).getCargo(), control.login.Login.getGrpPessoa().get(i).getEmail(), control.login.Login.getGrpPessoa().get(i).getSenha()};
 
-                dtm.addRow(rw);
-            }
+            dtm.addRow(rw);
+
         }
     }
 

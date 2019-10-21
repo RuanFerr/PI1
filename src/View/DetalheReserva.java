@@ -9,6 +9,7 @@ import control.reserva.*;
 import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,7 +21,10 @@ public class DetalheReserva extends javax.swing.JFrame {
      * Creates new form DetalheReserva
      */
     public DetalheReserva() {
+
+        setLocationRelativeTo(null);
         initComponents();
+
     }
     control.reserva.Reserva res;
 
@@ -28,13 +32,15 @@ public class DetalheReserva extends javax.swing.JFrame {
 
         initComponents();
 
+        setLocationRelativeTo(null);
+
         this.res = res;
 
-        String a = "" + res.getItemReserva().getNumSerie();
+        String a = "" + res.getEquipamento().getNumSerie();
 
-        labNome.setText(res.getItemReserva().getNome());
-        labMarca.setText(res.getItemReserva().getMarca());
-        labDescricao.setText(res.getItemReserva().getDescricao());
+        labNome.setText(res.getEquipamento().getNome());
+        labMarca.setText(res.getEquipamento().getMarca());
+        labDescricao.setText(res.getEquipamento().getDescricao());
         labNumSerie.setText(a);
 
         labNomePess.setText(res.getNomeResponsavel());
@@ -45,7 +51,43 @@ public class DetalheReserva extends javax.swing.JFrame {
 
         labSituacao.setText(control.reserva.Reserva.verSituacao(res.getDataHoraReserva()));
 
+        this.ret = 1;
+
     }
+
+    public DetalheReserva(HistoricoDevolucao hist) throws ParseException {
+
+        initComponents();
+
+        String a = "" + hist.getReserva().getEquipamento().getNumSerie();
+
+        labNome.setText(hist.getReserva().getEquipamento().getNome());
+        labMarca.setText(hist.getReserva().getEquipamento().getMarca());
+        labDescricao.setText(hist.getReserva().getEquipamento().getDescricao());
+        labNumSerie.setText(a);
+
+        labNomePess.setText(hist.getReserva().getNomeResponsavel());
+
+        labCpfPess.setText("" + hist.getReserva().getCpfResp());
+
+        labDataReserva.setText(hist.getReserva().getDataHoraReserva());
+
+        labSituacao.setText(control.reserva.Reserva.verSituacao(hist.getReserva().getDataHoraReserva()));
+
+        txtDano.setText(hist.getDano().getDano());
+
+        this.ret = 2;
+
+        btnDevolucao.setEnabled(false);
+        checkDano.setEnabled(false);
+        txtDano.setEnabled(true);
+
+        btnDevolucao.setVisible(false);
+
+        txtDano.setEditable(false);
+
+    }
+    private int ret;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,7 +99,7 @@ public class DetalheReserva extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlEquip = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         labNome = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -66,23 +108,28 @@ public class DetalheReserva extends javax.swing.JFrame {
         labDescricao = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         labNumSerie = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        panelPessoa = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         labNomePess = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         labCpfPess = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        pnlStatus = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         labDataReserva = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         labSituacao = new javax.swing.JLabel();
         btnDevolucao = new javax.swing.JButton();
+        pnlDano = new javax.swing.JPanel();
+        checkDano = new javax.swing.JCheckBox();
+        txtDano = new javax.swing.JTextField();
+        btnRetornar = new javax.swing.JButton();
 
         jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Stardust - Detalhes");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipamento"));
+        pnlEquip.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipamento"));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Nome:");
@@ -108,43 +155,43 @@ public class DetalheReserva extends javax.swing.JFrame {
         labNumSerie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labNumSerie.setText("numserie");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlEquipLayout = new javax.swing.GroupLayout(pnlEquip);
+        pnlEquip.setLayout(pnlEquipLayout);
+        pnlEquipLayout.setHorizontalGroup(
+            pnlEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEquipLayout.createSequentialGroup()
+                .addGroup(pnlEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEquipLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEquipLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5)
                         .addGap(3, 3, 3)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                 .addGap(57, 57, 57)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labNumSerie, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlEquipLayout.setVerticalGroup(
+            pnlEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEquipLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(labNome)
                     .addComponent(jLabel3)
                     .addComponent(labMarca))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(labDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
@@ -152,7 +199,7 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa"));
+        panelPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa"));
 
         jLabel2.setText("Nome:");
 
@@ -162,36 +209,36 @@ public class DetalheReserva extends javax.swing.JFrame {
 
         labCpfPess.setText("CPF");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelPessoaLayout = new javax.swing.GroupLayout(panelPessoa);
+        panelPessoa.setLayout(panelPessoaLayout);
+        panelPessoaLayout.setHorizontalGroup(
+            panelPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPessoaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labNomePess, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labCpfPess, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addGap(52, 52, 52))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelPessoaLayout.setVerticalGroup(
+            panelPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPessoaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
                         .addComponent(labCpfPess))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(panelPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(labNomePess)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Status"));
+        pnlStatus.setBorder(javax.swing.BorderFactory.createTitledBorder("Status"));
 
         jLabel4.setText("Reservado para: ");
 
@@ -201,11 +248,11 @@ public class DetalheReserva extends javax.swing.JFrame {
 
         labSituacao.setText("situacao");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlStatusLayout = new javax.swing.GroupLayout(pnlStatus);
+        pnlStatus.setLayout(pnlStatusLayout);
+        pnlStatusLayout.setHorizontalGroup(
+            pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlStatusLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -216,11 +263,11 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addComponent(labSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        pnlStatusLayout.setVerticalGroup(
+            pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlStatusLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(labDataReserva)
                     .addComponent(jLabel6)
@@ -235,58 +282,156 @@ public class DetalheReserva extends javax.swing.JFrame {
             }
         });
 
+        pnlDano.setBorder(javax.swing.BorderFactory.createTitledBorder("Dano"));
+
+        checkDano.setText("Dano no aparelho");
+        checkDano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkDanoActionPerformed(evt);
+            }
+        });
+
+        txtDano.setEnabled(false);
+        txtDano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDanoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlDanoLayout = new javax.swing.GroupLayout(pnlDano);
+        pnlDano.setLayout(pnlDanoLayout);
+        pnlDanoLayout.setHorizontalGroup(
+            pnlDanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDanoLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(checkDano)
+                .addGap(18, 18, 18)
+                .addComponent(txtDano)
+                .addContainerGap())
+        );
+        pnlDanoLayout.setVerticalGroup(
+            pnlDanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDanoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlDanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkDano)
+                    .addComponent(txtDano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        btnRetornar.setText("Retornar");
+        btnRetornar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetornarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlDano, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlEquip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(222, 222, 222)
+                        .addComponent(btnDevolucao)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addComponent(btnDevolucao)
+                .addContainerGap()
+                .addComponent(btnRetornar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRetornar)
+                .addGap(13, 13, 13)
+                .addComponent(pnlEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlDano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(btnDevolucao)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucaoActionPerformed
 
         HistoricoDevolucao hsD = new HistoricoDevolucao(res, "DEVOLUCAO", new Date(), (control.login.Login.getSessao().getNome() + " " + control.login.Login.getSessao().getSobrenome()));
-        
+        if (checkDano.isSelected()) {
+            hsD.setDano(new Dano(res.getEquipamento(), new Date(), txtDano.getText()));
+
+        } else {
+
+            hsD.setDano(null);
+
+        }
+
         HistoricoDevolucao.getHistoricoDevolucao().add(hsD);
-        
+
         control.reserva.Reserva.reservas.remove(hsD.getReserva());
 
         JOptionPane.showMessageDialog(null, "Sucess!");
-        
-        
+
+        Reserva reser = new Reserva();
+        reser.setVisible(true);
+        dispose();
+        reser.resetTab();
 
     }//GEN-LAST:event_btnDevolucaoActionPerformed
+
+    private void txtDanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDanoActionPerformed
+
+    }//GEN-LAST:event_txtDanoActionPerformed
+
+    private void checkDanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDanoActionPerformed
+
+        if (checkDano.isSelected()) {
+
+            txtDano.setEnabled(true);
+
+        } else {
+            txtDano.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_checkDanoActionPerformed
+
+    private void btnRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetornarActionPerformed
+        switch (ret) {
+            case 1:
+                Reserva reser = new Reserva();
+                reser.setVisible(true);
+                dispose();
+                reser.resetTab();
+
+                break;
+            case 2:
+                Historico hist = new Historico();
+                hist.setVisible(true);
+                this.dispose();
+                hist.resetTab();
+                break;
+        }
+    }//GEN-LAST:event_btnRetornarActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -319,6 +464,8 @@ public class DetalheReserva extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDevolucao;
+    private javax.swing.JButton btnRetornar;
+    private javax.swing.JCheckBox checkDano;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -328,9 +475,6 @@ public class DetalheReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel labCpfPess;
     private javax.swing.JLabel labDataReserva;
     private javax.swing.JLabel labDescricao;
@@ -339,5 +483,10 @@ public class DetalheReserva extends javax.swing.JFrame {
     private javax.swing.JLabel labNomePess;
     private javax.swing.JLabel labNumSerie;
     private javax.swing.JLabel labSituacao;
+    private javax.swing.JPanel panelPessoa;
+    private javax.swing.JPanel pnlDano;
+    private javax.swing.JPanel pnlEquip;
+    private javax.swing.JPanel pnlStatus;
+    private javax.swing.JTextField txtDano;
     // End of variables declaration//GEN-END:variables
 }

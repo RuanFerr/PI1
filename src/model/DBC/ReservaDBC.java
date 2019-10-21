@@ -5,8 +5,8 @@
  */
 package model.DBC;
 
-import control.cadastro.Pessoa;
 import control.connection.ConnectionFactory;
+import control.reserva.Reserva;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,9 +19,9 @@ import javax.swing.JOptionPane;
  *
  * @author Kelli
  */
-public class PessoaDBC {
-
-    public void insert(Pessoa pss) {
+public class ReservaDBC {
+    
+    public void insert(Reserva res) {
 
         Connection conn = ConnectionFactory.getConnection();
 
@@ -29,16 +29,12 @@ public class PessoaDBC {
 
         try {
 
-            pst = conn.prepareStatement("INSERT INTO Pessoa (nome, sobrenome, email, senha, matricula, cargo, nomeUsuario, CPF) values (?, ?, ?, ?, ?, ?, ?, ?)");
+            pst = conn.prepareStatement("INSERT INTO Reserva (dataHoraReserva, idIEquipamento, nomeResponsavel, CPFResponsavel) values (?, ?, ?, ?)");
 
-            pst.setString(1, pss.getNome());
-            pst.setString(2, pss.getSobrenome());
-            pst.setString(3, pss.getEmail());
-            pst.setString(4, pss.getSenha());
-            pst.setString(5, String.valueOf(pss.getMatricula()));
-            pst.setString(5, pss.getCargo());
-            pst.setString(5, pss.getNomeUsuario());
-            pst.setString(5, String.valueOf(pss.getCpf()));
+            pst.setString(1, res.getDataHoraReserva());
+            pst.setInt(2, res.getEquipamento().getId());
+            pst.setString(3, res.getNomeResponsavel());
+            pst.setLong(4, res.getCpfResp());
 
             pst.execute();
 
@@ -50,8 +46,8 @@ public class PessoaDBC {
         }
 
     }
-
-    public void update(Pessoa pss) {
+    
+    public void update(Reserva res) {
 
         Connection conn = ConnectionFactory.getConnection();
 
@@ -59,17 +55,13 @@ public class PessoaDBC {
 
         try {
 
-            pst = conn.prepareStatement("UPDATE Pessoa set nome = ?, sobrenome = ?, email = ?, senha = ?, matricula = ?, cargo = ?, nomeUsuario = ?, CPF = ? where id = ?");
+            pst = conn.prepareStatement("UPDATE Reserva set dataHoraReserva = ?, idEquipamento = ?, nomeResponsavel = ?, cpfResponsavel = ? where id = ?");
 
-            pst.setString(1, pss.getNome());
-            pst.setString(2, pss.getSobrenome());
-            pst.setString(3, pss.getEmail());
-            pst.setString(4, pss.getSenha());
-            pst.setString(5, String.valueOf(pss.getMatricula()));
-            pst.setString(6, pss.getCargo());
-            pst.setString(7, pss.getNomeUsuario());
-            pst.setString(8, String.valueOf(pss.getCpf()));
-            pst.setString(9, String.valueOf(pss.getId()));
+            pst.setString(1, res.getDataHoraReserva());
+            pst.setInt(2, res.getEquipamento().getId());
+            pst.setString(3, res.getNomeResponsavel());
+            pst.setLong(4, res.getCpfResp());
+            pst.setInt(5, res.getIdReserva());
 
             pst.execute();
 
@@ -81,8 +73,8 @@ public class PessoaDBC {
         }
 
     }
-
-    public List<Pessoa> select() {
+    
+    public List<Reserva> select() {
 
         Connection conn = ConnectionFactory.getConnection();
 
@@ -90,27 +82,21 @@ public class PessoaDBC {
 
         ResultSet rs = null;
 
-        List<Pessoa> lista = new ArrayList();
+        List<Reserva> lista = new ArrayList<>();
 
         try {
 
-            pst = conn.prepareStatement("SELECT * from Pessoa");
+            pst = conn.prepareStatement("SELECT * from Reserva");
             rs = pst.executeQuery();
 
             while (rs.next()) {
 
-                Pessoa pss = new Pessoa();
-                pss.setNome(rs.getString("nome"));
-                pss.setSobrenome(rs.getString("sobrenome"));
-                pss.setEmail(rs.getString("email"));
-                pss.setSenha(rs.getString("senha"));
-                pss.setMatricula(rs.getInt("matricula"));
-                pss.setCargo(rs.getString("cargo"));
-                pss.setNomeUsuario(rs.getString("nomeUsuario"));
-                pss.setCpf(rs.getInt("CPF"));
-                pss.setId(rs.getInt("id"));
-
-                lista.add(pss);
+                Reserva res = new Reserva();
+                res.setDataHoraReserva(rs.getString("dataHoraReserva"));
+                res.setIdReserva(rs.getInt("id"));
+                res.setNomeResponsavel(rs.getString("nomeResponsavel"));
+                res.setCpfResp(rs.getInt("CPFResponsavel"));
+                lista.add(res);
 
             }
 
@@ -123,8 +109,8 @@ public class PessoaDBC {
         return lista;
 
     }
-
-    public void delete(Pessoa pss) {
+    
+    public void delete(Reserva res) {
 
         Connection conn = ConnectionFactory.getConnection();
 
@@ -132,8 +118,8 @@ public class PessoaDBC {
 
         try {
 
-            pst = conn.prepareStatement("DELETE FROM pessoa WHERE id = ?");
-            pst.setInt(1, pss.getId());
+            pst = conn.prepareStatement("DELETE FROM Reserva WHERE id = ?");
+            pst.setInt(1, res.getIdReserva());
 
             pst.execute();
 
@@ -145,5 +131,5 @@ public class PessoaDBC {
         }
 
     }
-
+    
 }

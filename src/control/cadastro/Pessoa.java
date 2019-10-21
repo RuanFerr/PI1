@@ -9,7 +9,8 @@ public class Pessoa {
     private String cargo;
     private String nomeUsuario;
     private int matricula;
-    private int cpf;
+    private long cpf;
+    private int id;
 
     public String getNome() {
         return nome;
@@ -59,11 +60,11 @@ public class Pessoa {
         this.matricula = matricula;
     }
 
-    public int getCpf() {
+    public long getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(long cpf) {
         this.cpf = cpf;
     }
 
@@ -74,9 +75,17 @@ public class Pessoa {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    public void realizarLogin(String email, String senha){
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void realizarLogin(String email, String senha) {
         //autenticar no banco
     }
-    
+
 }

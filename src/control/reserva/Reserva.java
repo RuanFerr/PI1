@@ -10,10 +10,10 @@ public class Reserva {
 
     private int idReserva;
     private String dataHoraReserva;
-    private Equipamento itemReserva;
+    private Equipamento equipamento;
     private String nomeResponsavel;
     private long CpfResp;
-
+    
     public static SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
 
     private Date newData;
@@ -34,16 +34,6 @@ public class Reserva {
         this.CpfResp = CpfResp;
     }
 
-    private Equipamento equipamento;
-
-    public Equipamento getEquipamento() {
-        return equipamento;
-    }
-
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
-    }
-
     public static ArrayList<Reserva> getLogReservas() {
         return logReservas;
     }
@@ -58,7 +48,7 @@ public class Reserva {
 
     public Reserva(Equipamento item, String dataHora, String nomeResponsavel, long cpfResp) {
         this.dataHoraReserva = dataHora;
-        this.itemReserva = item;
+        this.equipamento = item;
         this.nomeResponsavel = nomeResponsavel;
         this.CpfResp = cpfResp;
     }
@@ -79,16 +69,12 @@ public class Reserva {
         this.dataHoraReserva = dataHoraReserva;
     }
 
-    public Equipamento getItemReserva() {
-        return itemReserva;
+    public Equipamento getEquipamento() {
+        return equipamento;
     }
 
-    public void setItemReserva(Equipamento itemReserva) {
-        this.itemReserva = itemReserva;
-    }
-
-    public void registraDevolucao() {
-
+    public void setEquipamento(Equipamento itemReserva) {
+        this.equipamento = itemReserva;
     }
 
     public static String[] getMes() {
@@ -167,7 +153,7 @@ public class Reserva {
         boolean aceito = true;
 
         for (int i = 0; i < reservas.size(); i++) {
-            if ((res.dataHoraReserva.equals(reservas.get(i).dataHoraReserva)) && (res.itemReserva.equals(reservas.get(i).itemReserva))) {
+            if ((res.dataHoraReserva.equals(reservas.get(i).dataHoraReserva)) && (res.equipamento.equals(reservas.get(i).equipamento))) {
                 aceito = false;
             }
         }
