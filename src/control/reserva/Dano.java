@@ -6,61 +6,38 @@
 package control.reserva;
 
 import java.util.Date;
+import control.reserva.Equipamento;
 
 /**
  *
  * @author Kelli
  */
 public class Dano {
-    
-    private String marca;
-    private int numSerie;
-    private String nomeEquip;
-    private String pode;
-    private String tipo;
+
+    public Dano() {
+    }
+
+    public Dano(Equipamento equip, Date Data, String dano) {
+        this.equip = equip;
+        
+        this.data = data;
+        
+        this.dano = dano;
+    }
+
+    private Equipamento equip;
     private Date data;
-    private int hora;
+    private String dano;
+    private int Id;
 
-    public String getMarca() {
-        return marca;
+    public String getDano() {
+        return dano;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setDano(String dano) {
+        this.dano = dano;
     }
-
-    public int getNumSerie() {
-        return numSerie;
-    }
-
-    public void setNumSerie(int numSerie) {
-        this.numSerie = numSerie;
-    }
-
-    public String getNomeEquip() {
-        return nomeEquip;
-    }
-
-    public void setNomeEquip(String nomeEquip) {
-        this.nomeEquip = nomeEquip;
-    }
-
-    public String getPode() {
-        return pode;
-    }
-
-    public void setPode(String pode) {
-        this.pode = pode;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
+        
     public Date getData() {
         return data;
     }
@@ -69,13 +46,20 @@ public class Dano {
         this.data = data;
     }
 
-    public int getHora() {
-        return hora;
+    public Equipamento getEquip() {
+        return equip;
     }
 
-    public void setHora(int hora) {
-        this.hora = hora;
+    public void setEquip(Equipamento equip) {
+        this.equip = equip;
     }
-    
-    
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+
 }

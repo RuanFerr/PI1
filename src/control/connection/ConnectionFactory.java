@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 public class ConnectionFactory {
 
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/stardust";
-    private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String URL = "jdbc:mysql://localhost:3306/stdust";
+    private static final String USER = "stdust";
+    private static final String PASS = "multistar";
 
     public static Connection getConnection() {
         try {
@@ -32,7 +32,7 @@ public class ConnectionFactory {
 
         } catch (ClassNotFoundException | SQLException ex) {
 
-            throw new RuntimeException(" SUA CONEXÃO NÃO VENCEU A GUERRA DO SANTO GRAAL POR CAUSA DE: ", ex); //Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("FALHA AO INICIAR A CONEXÃO: ", ex); //Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
@@ -45,43 +45,42 @@ public class ConnectionFactory {
                 connection.close();
             }
         } catch (SQLException ex) {
-            throw new RuntimeException("O Q ACONTECE SE VC ABRE 500 ABAS, E TIRA O MOUSE E O TECLADO: ", ex);//Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("FALHA AO ENCERRAR A CONEXÃO: ", ex);//Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
     }
+
     //OVERLOAD DA CLOSECONNECTION ANTERIOR, PRA FECHAR A CONEXÃO E O STATEMENT
     public static void closeConnection(Connection connection, PreparedStatement pst) {
 
         closeConnection(connection);
-        
+
         try {
             if (pst != null) {
                 pst.close();
             }
         } catch (SQLException ex) {
-            throw new RuntimeException("O Q ACONTECE SE VC ABRE 500 ABAS, E TIRA O MOUSE E O TECLADO: ", ex);//Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("FALHA AO ENCERRAR A CONEXÃO: ", ex);//Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
     }
-    //OVERLOAD DAS ANTERIORES, QUE FECHA TUDO, ATÉ O OBJETO Q ESTAMOS GUARDANDO OS RESULTADOS DAS CONSULTAS AO BANCO
+
+    //OVERLOAD DAS ANTERIORES, QUE FECHA TUDO, ATÉ O OBJETO ONDE ESTAMOS ALOCANDO OS RESULTADOS DAS CONSULTAS AO BANCO
     public static void closeConnection(Connection connection, PreparedStatement pst, ResultSet rSet) {
 
         closeConnection(connection, pst);
-        
-        
+
         try {
             if (rSet != null) {
                 rSet.close();
             }
         } catch (SQLException ex) {
-            throw new RuntimeException("O Q ACONTECE SE VC ABRE 500 ABAS, E TIRA O MOUSE E O TECLADO: ", ex);//Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("FALHA AO ENCERRAR A CONEXÃO: ", ex);//Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
     }
-    
-    
 
 }

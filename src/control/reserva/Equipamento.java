@@ -8,6 +8,7 @@ public class Equipamento {
     private String marca;
     private String descricao;
     private int numSerie;
+    private int id;
     
     private static ArrayList<Equipamento> logEquipamento = new ArrayList();
 
@@ -50,6 +51,14 @@ public class Equipamento {
         this.numSerie = numSerie;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public static ArrayList<Equipamento> getLogEquipamento() {
         return logEquipamento;
     }

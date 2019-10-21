@@ -27,6 +27,7 @@ public class Reserva extends javax.swing.JFrame {
 
     public Reserva() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,6 +54,7 @@ public class Reserva extends javax.swing.JFrame {
         verDetalhe = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         btnAno = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,17 +69,18 @@ public class Reserva extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Equipamento", "Responsável"
+                "nomeResponsavel", "Equipamento", "dataReserva", "funcionario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tabelaReserva.getTableHeader().setReorderingAllowed(false);
         tabelaReserva.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaReservaMouseClicked(evt);
@@ -154,6 +157,13 @@ public class Reserva extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Histórico de reservas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,37 +191,35 @@ public class Reserva extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(cadPessoa)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cxItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(180, 180, 180))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nomeResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(regReserva)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(verDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(42, 42, 42)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cancelReserva)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(CpfResp))))
+                                .addComponent(nomeResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(CpfResp))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(regReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(verDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cancelReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addComponent(jButton1)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -242,13 +250,15 @@ public class Reserva extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelReserva)
                     .addComponent(regReserva)
-                    .addComponent(verDetalhe))
+                    .addComponent(verDetalhe)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesActionPerformed
@@ -279,33 +289,39 @@ public class Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_cadEquipActionPerformed
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
+
         try {
             if (testaCampos()) {
                 String data = (btnDia.getSelectedItem() + "/" + btnMes.getSelectedItem() + "/" + btnAno.getSelectedItem());
 
                 if (control.reserva.Reserva.testarData(data)) {
+                    if (testaCpfNumeros()) {
+                        Equipamento equip = CadastroEquipamento.itens.get(cxItem.getSelectedIndex());
 
-                    Equipamento equip = CadastroEquipamento.itens.get(cxItem.getSelectedIndex());
+                        String item = (String) cxItem.getSelectedItem();
 
-                    String item = (String) cxItem.getSelectedItem();
+                        control.reserva.Reserva res = new control.reserva.Reserva(equip, data, nomeResponsavel.getText(), Long.parseLong(CpfResp.getText()));
 
-                    control.reserva.Reserva res = new control.reserva.Reserva(equip, data, nomeResponsavel.getText(), Long.parseLong(CpfResp.getText()));
+                        if (control.reserva.Reserva.validarReserva(res)) {
 
-                    if (control.reserva.Reserva.validarReserva(res)) {
+                            control.reserva.Reserva.reservas.add(res);
 
-                        control.reserva.Reserva.reservas.add(res);
+                            control.reserva.Reserva.getLogReservas().add(res);
 
-                        control.reserva.Reserva.getLogReservas().add(res);
+                            DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
+                            String[] row = {data, item, nomeResponsavel.getText()};
+                            dtm.addRow(row);
 
-                        DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
-                        String[] row = {data, item, nomeResponsavel.getText()};
-                        dtm.addRow(row);
+                            JOptionPane.showMessageDialog(null, "Reserva registrada com sucesso");
 
-                        JOptionPane.showMessageDialog(null, "Reserva registrada com sucesso");
+                        } else {
 
+                            JOptionPane.showMessageDialog(null, "equipamento indisponível para reserva nessa data");
+
+                        }
                     } else {
 
-                        JOptionPane.showMessageDialog(null, "equipamento indisponível para reserva nessa data");
+                        JOptionPane.showMessageDialog(null, "CPF inválido");
 
                     }
                 } else {
@@ -371,14 +387,16 @@ public class Reserva extends javax.swing.JFrame {
 
         if (tabelaReserva.getSelectedRow() != -1) {
 
-            DetalheReserva detalhe = null;
             try {
+                DetalheReserva detalhe = null;
                 detalhe = new DetalheReserva(control.reserva.Reserva.reservas.get(tabelaReserva.getSelectedRow()));
+                detalhe.setVisible(true);
+                dispose();
             } catch (ParseException ex) {
+
                 Logger.getLogger(Reserva.class.getName()).log(Level.SEVERE, null, ex);
+
             }
-            detalhe.setVisible(true);
-            detalhe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma reserva");
@@ -389,6 +407,15 @@ public class Reserva extends javax.swing.JFrame {
     private void btnAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnoActionPerformed
         btnMes.setModel(new javax.swing.DefaultComboBoxModel<>(control.reserva.Reserva.getMes()));
     }//GEN-LAST:event_btnAnoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Historico historic = new Historico();
+        historic.setVisible(true);
+        dispose();
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public Reserva(JComboBox<String> btnMes, JScrollPane jScrollPane1, JTable tabelaReserva) throws HeadlessException {
         this.btnMes = btnMes;
@@ -465,20 +492,34 @@ public class Reserva extends javax.swing.JFrame {
 
     }
 
-    public void addTab() {
+    public void resetTab() {
 
-        if (!control.reserva.Reserva.reservas.isEmpty()) {
+        DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
 
-            DefaultTableModel dtm = (DefaultTableModel) tabelaReserva.getModel();
+        dtm.setNumRows(0);
 
-            for (int j = 0; j < control.reserva.Reserva.reservas.size(); j++) {
+        for (int j = 0; j < control.reserva.Reserva.reservas.size(); j++) {
 
-                Object[] rw = {reservas.get(j).getDataHoraReserva(), reservas.get(j).getEquipamento().getNome(), reservas.get(j).getNomeResponsavel()};
+            Object[] rw = {reservas.get(j).getDataHoraReserva(), reservas.get(j).getEquipamento().getNome(), reservas.get(j).getNomeResponsavel()};
 
-                dtm.addRow(rw);
+            dtm.addRow(rw);
 
-            }
         }
+    }
+
+    public boolean testaCpfNumeros() {
+
+        try {
+
+            double num = Double.parseDouble(CpfResp.getText());
+            return true;
+
+        } catch (Exception e) {
+
+            return false;
+
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -490,6 +531,7 @@ public class Reserva extends javax.swing.JFrame {
     private javax.swing.JButton cadPessoa;
     private javax.swing.JButton cancelReserva;
     private javax.swing.JComboBox<Object> cxItem;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

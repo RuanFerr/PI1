@@ -16,6 +16,7 @@ public class CadastroEquipamento extends javax.swing.JFrame {
 
     public CadastroEquipamento() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     public static ArrayList<Equipamento> itens = new ArrayList();
 
@@ -120,9 +121,6 @@ public class CadastroEquipamento extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -154,17 +152,21 @@ public class CadastroEquipamento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(numSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(marca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(marca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cadPessoa)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cadPessoa)
                     .addComponent(regReserva))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(nomeItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,30 +186,34 @@ public class CadastroEquipamento extends javax.swing.JFrame {
                     .addComponent(btnAtualizar)
                     .addComponent(btnDelete))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
 
         if (!testaCampos()) {
-            DefaultTableModel dtmAdd = (DefaultTableModel) tabelaItem.getModel();
+            if (testaNumSerie()) {
+                DefaultTableModel dtmAdd = (DefaultTableModel) tabelaItem.getModel();
 
-            Equipamento it = new Equipamento(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText()));
+                Equipamento it = new Equipamento(nomeItem.getText(), marca.getText(), descricao.getText(), Integer.parseInt(numSerie.getText()));
 
-            itens.add(it);
+                itens.add(it);
 
-            control.reserva.Equipamento.getLogEquipamento().add(it);
+                control.reserva.Equipamento.getLogEquipamento().add(it);
 
-            Object[] tabela = {nomeItem.getText(), marca.getText(), descricao.getText(), numSerie.getText()};
-            dtmAdd.addRow(tabela);
+                Object[] tabela = {nomeItem.getText(), marca.getText(), descricao.getText(), numSerie.getText()};
+                dtmAdd.addRow(tabela);
 
-            JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
-            limpaCampos();
+                JOptionPane.showMessageDialog(null, "Adicionado com sucesso");
+                limpaCampos();
 
+            } else {
+                JOptionPane.showMessageDialog(null, "Numero de série precisa conter apenas numeros");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "precisa preencher todos os campos");
         }
@@ -291,11 +297,11 @@ public class CadastroEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_cadPessoaActionPerformed
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
-        Reserva res = new Reserva();
-        res.setVisible(true);
+        Reserva regRes = new Reserva();
+        regRes.setVisible(true);
         dispose();
 
-        res.addTab();
+        regRes.resetTab();
     }//GEN-LAST:event_regReservaActionPerformed
 
     public static void main(String args[]) {
@@ -350,25 +356,35 @@ public class CadastroEquipamento extends javax.swing.JFrame {
         return (cNome || cMarca || cDescricao || cNumSerie);
     }
 
+    public boolean testaNumSerie() {
+        boolean test = false;
+        try {
+            int num = Integer.parseInt(numSerie.getText());
+            test = true;
+        } catch (NumberFormatException e) {
+            test = false;
+        }
+        return test;
+
+    }
+
     public boolean testaData(String data) {
 
         return true;
-    }
 
-    ;
+    }
 
     public void addTab() {
 
-        if (!itens.isEmpty()) {
+        DefaultTableModel dtm = (DefaultTableModel) tabelaItem.getModel();
 
-            DefaultTableModel dtm = (DefaultTableModel) tabelaItem.getModel();
+        dtm.setRowCount(0);
 
-            for (int j = 0; j < itens.size(); j++) {
+        for (int j = 0; j < itens.size(); j++) {
 
-                Object[] rw = {itens.get(j).getNome(), itens.get(j).getMarca(), itens.get(j).getDescricao(), itens.get(j).getNumSerie()};
-                dtm.addRow(rw);
+            Object[] rw = {itens.get(j).getNome(), itens.get(j).getMarca(), itens.get(j).getDescricao(), itens.get(j).getNumSerie()};
+            dtm.addRow(rw);
 
-            }
         }
     }
 
