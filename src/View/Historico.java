@@ -120,10 +120,11 @@ public class Historico extends javax.swing.JFrame {
         if (tabHistorico.getSelectedRow() != -1) {
 
             try {
-                DetalheReserva detalhe = null;
-                detalhe = new DetalheReserva(control.reserva.HistoricoDevolucao.getHistoricoDevolucao().get(tabHistorico.getSelectedRow()));
+
+                DetalheReserva detalhe = new DetalheReserva(control.reserva.HistoricoDevolucao.getHistoricoDevolucao().get(tabHistorico.getSelectedRow()));
                 detalhe.setVisible(true);
                 dispose();
+                
             } catch (ParseException ex) {
 
                 Logger.getLogger(Reserva.class.getName()).log(Level.SEVERE, null, ex);
