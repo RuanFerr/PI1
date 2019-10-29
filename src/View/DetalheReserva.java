@@ -73,9 +73,13 @@ public class DetalheReserva extends javax.swing.JFrame {
         labDataReserva.setText(hist.getReserva().getDataHoraReserva());
 
         labSituacao.setText(control.reserva.Reserva.verSituacao(hist.getReserva().getDataHoraReserva()));
-        
-            txtDano.setText("");
-        
+
+        if (hist.getDano() != null) {
+            
+            txtDano.setText(hist.getDano().getDano());
+            
+        }
+
         this.ret = 2;
 
         btnDevolucao.setEnabled(false);
