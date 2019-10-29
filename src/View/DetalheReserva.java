@@ -59,12 +59,12 @@ public class DetalheReserva extends javax.swing.JFrame {
 
         initComponents();
 
-        String a = "" + hist.getReserva().getEquipamento().getNumSerie();
+        String numS = "" + hist.getReserva().getEquipamento().getNumSerie();
 
         labNome.setText(hist.getReserva().getEquipamento().getNome());
         labMarca.setText(hist.getReserva().getEquipamento().getMarca());
         labDescricao.setText(hist.getReserva().getEquipamento().getDescricao());
-        labNumSerie.setText(a);
+        labNumSerie.setText(numS);
 
         labNomePess.setText(hist.getReserva().getNomeResponsavel());
 
