@@ -13,8 +13,17 @@ public class Reserva {
     private Equipamento equipamento;
     private String nomeResponsavel;
     private long CpfResp;
-    
+    private String situacao;
+
     public static SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
 
     private Date newData;
 

@@ -16,9 +16,13 @@ import javax.swing.JOptionPane;
 public class HistoricoDevolucao {
 
     private Reserva reserva;
+
+    private int idHistorico;
     private String operacao;
     private Date dataOperacao;
     private String nomeFunc;
+    private int idFunc;
+
     private Dano dano;
 
     public HistoricoDevolucao() {
@@ -32,6 +36,22 @@ public class HistoricoDevolucao {
         this.dataOperacao = dataOperacao;
         this.operacao = operacao;
 
+    }
+
+    public int getIdHistorico() {
+        return idHistorico;
+    }
+
+    public void setIdHistorico(int idHistorico) {
+        this.idHistorico = idHistorico;
+    }
+
+    public int getIdFunc() {
+        return idFunc;
+    }
+
+    public void setIdFunc(int idFunc) {
+        this.idFunc = idFunc;
     }
 
     private static ArrayList<HistoricoDevolucao> historicoDevolucao = new ArrayList();

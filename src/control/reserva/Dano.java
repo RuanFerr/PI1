@@ -18,6 +18,7 @@ public class Dano {
     }
 
     public Dano(Equipamento equip, Date Data, String dano) {
+        
         this.equip = equip;
         
         this.data = data;
@@ -29,6 +30,7 @@ public class Dano {
     private Date data;
     private String dano;
     private int Id;
+    
 
     public String getDano() {
         return dano;

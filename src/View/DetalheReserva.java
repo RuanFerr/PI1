@@ -75,9 +75,9 @@ public class DetalheReserva extends javax.swing.JFrame {
         labSituacao.setText(control.reserva.Reserva.verSituacao(hist.getReserva().getDataHoraReserva()));
 
         if (hist.getDano() != null) {
-            
+
             txtDano.setText(hist.getDano().getDano());
-            
+
         }
 
         this.ret = 2;
@@ -375,6 +375,7 @@ public class DetalheReserva extends javax.swing.JFrame {
     private void btnDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucaoActionPerformed
 
         HistoricoDevolucao hsD = new HistoricoDevolucao(res, "DEVOLUCAO", new Date(), (control.login.Login.getSessao().getNome() + " " + control.login.Login.getSessao().getSobrenome()));
+        hsD.setIdFunc(control.login.Login.getSessao().getId());
         if (checkDano.isSelected()) {
             hsD.setDano(new Dano(res.getEquipamento(), new Date(), txtDano.getText()));
 

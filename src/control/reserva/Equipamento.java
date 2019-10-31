@@ -9,8 +9,11 @@ public class Equipamento {
     private String descricao;
     private int numSerie;
     private int id;
-    
+
     private static ArrayList<Equipamento> logEquipamento = new ArrayList();
+
+    public Equipamento() {
+    }
 
     public Equipamento(String nome, String marca, String descricao, int numSerie) {
         this.nome = nome;
@@ -58,9 +61,9 @@ public class Equipamento {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public static ArrayList<Equipamento> getLogEquipamento() {
         return logEquipamento;
     }
-    
+
 }

@@ -6,8 +6,9 @@
 package model.DBC;
 
 import control.connection.ConnectionFactory;
-import control.reserva.Reserva;
 import java.sql.Connection;
+import control.reserva.Dano;
+import control.reserva.Equipamento;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,9 +20,9 @@ import javax.swing.JOptionPane;
  *
  * @author Kelli
  */
-public class ReservaDBC {
-    
-    public void insert(Reserva res) {
+public class DanoDBC {
+
+    public void insert(Dano dano) {
 
         Connection conn = ConnectionFactory.getConnection();
 
@@ -29,12 +30,36 @@ public class ReservaDBC {
 
         try {
 
-            pst = conn.prepareStatement("INSERT INTO Reserva (dataHoraReserva, idIEquipamento, nomeResponsavel, CPFResponsavel) values (?, ?, ?, ?)");
+            pst = conn.prepareStatement("INSERT INTO Dano (descricaoDano, idEquipamento) values (?, ?)");
 
-            pst.setString(1, res.getDataHoraReserva());
-            pst.setInt(2, res.getEquipamento().getId());
-            pst.setString(3, res.getNomeResponsavel());
-            pst.setLong(4, res.getCpfResp());
+            pst.setString(1, dano.getDano());
+            pst.setInt(2, dano.getEquip().getId());
+
+            pst.execute();
+
+            JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(conn, pst);
+        }
+
+    }
+
+    public void update(Dano dano) {
+
+        Connection conn = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = null;
+
+        try {
+
+            pst = conn.prepareStatement("UPDATE Dano set descricaoDano = ?, idEquipamento = ? where idDano = ?");
+
+            pst.setString(1, dano.getDano());
+            pst.setInt(2, dano.getEquip().getId());
+            pst.setInt(3, dano.getId());
 
             pst.execute();
 
@@ -46,35 +71,8 @@ public class ReservaDBC {
         }
 
     }
-    
-    public void update(Reserva res) {
 
-        Connection conn = ConnectionFactory.getConnection();
-
-        PreparedStatement pst = null;
-
-        try {
-
-            pst = conn.prepareStatement("UPDATE Reserva set dataHoraReserva = ?, idEquipamento = ?, nomeResponsavel = ?, cpfResponsavel = ? where id = ?");
-
-            pst.setString(1, res.getDataHoraReserva());
-            pst.setInt(2, res.getEquipamento().getId());
-            pst.setString(3, res.getNomeResponsavel());
-            pst.setLong(4, res.getCpfResp());
-            pst.setInt(5, res.getIdReserva());
-
-            pst.execute();
-
-            JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
-        } finally {
-            ConnectionFactory.closeConnection(conn, pst);
-        }
-
-    }
-    
-    public List<Reserva> select() {
+    public List<Dano> select() {
 
         Connection conn = ConnectionFactory.getConnection();
 
@@ -82,21 +80,21 @@ public class ReservaDBC {
 
         ResultSet rs = null;
 
-        List<Reserva> lista = new ArrayList();
+        List<Dano> lista = new ArrayList();
 
         try {
 
-            pst = conn.prepareStatement("SELECT * from Reserva");
+            pst = conn.prepareStatement("SELECT * from Dano");
             rs = pst.executeQuery();
 
             while (rs.next()) {
 
-                Reserva res = new Reserva();
-                res.setDataHoraReserva(rs.getString("dataHoraReserva"));
-                res.setIdReserva(rs.getInt("id"));
-                res.setNomeResponsavel(rs.getString("nomeResponsavel"));
-                res.setCpfResp(rs.getInt("CPFResponsavel"));
-                lista.add(res);
+                Dano dano = new Dano();
+                dano.setDano(rs.getString("descricao"));
+                dano.setId(rs.getInt("idDano"));
+                dano.setEquip(new Equipamento());
+                dano.getEquip().setId(rs.getInt("idEquipamento"));
+                lista.add(dano);
 
             }
 
@@ -109,8 +107,8 @@ public class ReservaDBC {
         return lista;
 
     }
-    
-    public void delete(Reserva res) {
+
+    public void delete(Dano dano) {
 
         Connection conn = ConnectionFactory.getConnection();
 
@@ -118,8 +116,8 @@ public class ReservaDBC {
 
         try {
 
-            pst = conn.prepareStatement("DELETE FROM Reserva WHERE id = ?");
-            pst.setInt(1, res.getIdReserva());
+            pst = conn.prepareStatement("DELETE FROM Dano WHERE idDano = ?");
+            pst.setInt(1, dano.getId());
 
             pst.execute();
 
@@ -131,5 +129,5 @@ public class ReservaDBC {
         }
 
     }
-    
+
 }
