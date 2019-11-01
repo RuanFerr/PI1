@@ -9,7 +9,8 @@ import control.reserva.*;
 import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
+import model.pdf.PDFGenerator;
 
 /**
  *
@@ -127,6 +128,7 @@ public class DetalheReserva extends javax.swing.JFrame {
         checkDano = new javax.swing.JCheckBox();
         txtDano = new javax.swing.JTextField();
         btnRetornar = new javax.swing.JButton();
+        btnGerarPDF = new javax.swing.JButton();
 
         jLabel9.setText("jLabel9");
 
@@ -330,6 +332,13 @@ public class DetalheReserva extends javax.swing.JFrame {
             }
         });
 
+        btnGerarPDF.setText("Gerar PDF");
+        btnGerarPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarPDFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -341,7 +350,9 @@ public class DetalheReserva extends javax.swing.JFrame {
                     .addComponent(panelPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
+                        .addGap(106, 106, 106)
+                        .addComponent(btnGerarPDF)
+                        .addGap(43, 43, 43)
                         .addComponent(btnDevolucao)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -364,7 +375,9 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(pnlDano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(btnDevolucao)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDevolucao)
+                    .addComponent(btnGerarPDF))
                 .addContainerGap())
         );
 
@@ -432,6 +445,12 @@ public class DetalheReserva extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRetornarActionPerformed
 
+    private void btnGerarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPDFActionPerformed
+
+        PDFGenerator.imprimirComprovanteReserva(res);
+
+    }//GEN-LAST:event_btnGerarPDFActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -469,6 +488,7 @@ public class DetalheReserva extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDevolucao;
+    private javax.swing.JButton btnGerarPDF;
     private javax.swing.JButton btnRetornar;
     private javax.swing.JCheckBox checkDano;
     private javax.swing.JLabel jLabel1;

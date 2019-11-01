@@ -296,7 +296,12 @@ public class Reserva extends javax.swing.JFrame {
 
                         String item = (String) cxEquip.getSelectedItem();
 
-                        control.reserva.Reserva res = new control.reserva.Reserva(equip, data, nomeResponsavel.getText(), Long.parseLong(CpfResp.getText()));
+                        control.reserva.Reserva res = new control.reserva.Reserva(
+                                equip,
+                                data,
+                                nomeResponsavel.getText(),
+                                Long.parseLong(CpfResp.getText())
+                        );
 
                         if (control.reserva.Reserva.validarReserva(res)) {
 
@@ -511,7 +516,6 @@ public class Reserva extends javax.swing.JFrame {
         for (int j = 0; j < control.reserva.Reserva.reservas.size(); j++) {
 
             Object[] rw = {
-                
                 reservas.get(j).getDataHoraReserva(),
                 reservas.get(j).getEquipamento().getNome(),
                 reservas.get(j).getNomeResponsavel(),

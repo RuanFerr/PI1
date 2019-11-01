@@ -38,7 +38,9 @@
                   <Component id="panelPessoa" alignment="1" max="32767" attributes="0"/>
                   <Component id="pnlStatus" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                      <Component id="btnGerarPDF" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="btnDevolucao" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -66,7 +68,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="pnlDano" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="51" max="32767" attributes="0"/>
-              <Component id="btnDevolucao" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnDevolucao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGerarPDF" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -401,6 +406,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRetornarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnGerarPDF">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gerar PDF"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerarPDFActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
