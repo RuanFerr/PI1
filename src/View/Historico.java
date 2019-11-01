@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Kelli
@@ -124,7 +125,7 @@ public class Historico extends javax.swing.JFrame {
                 DetalheReserva detalhe = new DetalheReserva(control.reserva.HistoricoDevolucao.getHistoricoDevolucao().get(tabHistorico.getSelectedRow()));
                 detalhe.setVisible(true);
                 dispose();
-                
+
             } catch (ParseException ex) {
 
                 Logger.getLogger(Reserva.class.getName()).log(Level.SEVERE, null, ex);
@@ -192,6 +193,10 @@ public class Historico extends javax.swing.JFrame {
 
     }
 
+    private void fillTab() {
+        DefaultTableModel dtm = (DefaultTableModel) tabHistorico.getModel();
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDetalhes;
     private javax.swing.JButton btnRetornar;

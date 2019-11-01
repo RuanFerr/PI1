@@ -20,7 +20,7 @@ public class PDFGenerator {
         Document doc = new Document();
         try {
 
-            PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\Kelli\\Documents\\Comprovante_" + res.getNomeResponsavel() + ".pdf"));
+            PdfWriter.getInstance(doc, new FileOutputStream("C:\\Comprovante_" + res.getNomeResponsavel() + ".pdf"));
             doc.open();
             doc.add(new Paragraph("Equipamento: " + res.getEquipamento().getNome()));
             doc.add(new Paragraph("Marca: " + res.getEquipamento().getMarca()));

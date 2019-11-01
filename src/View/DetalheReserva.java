@@ -67,6 +67,8 @@ public class DetalheReserva extends javax.swing.JFrame {
         labDescricao.setText(hist.getReserva().getEquipamento().getDescricao());
         labNumSerie.setText(numS);
 
+        res = hist.getReserva();
+
         labNomePess.setText(hist.getReserva().getNomeResponsavel());
 
         labCpfPess.setText("" + hist.getReserva().getCpfResp());
@@ -332,6 +334,7 @@ public class DetalheReserva extends javax.swing.JFrame {
             }
         });
 
+        btnGerarPDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon-pdf-file.png"))); // NOI18N
         btnGerarPDF.setText("Gerar PDF");
         btnGerarPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,9 +377,9 @@ public class DetalheReserva extends javax.swing.JFrame {
                 .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlDano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDevolucao)
+                    .addComponent(btnDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGerarPDF))
                 .addContainerGap())
         );
@@ -405,6 +408,7 @@ public class DetalheReserva extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Sucess!");
 
         Reserva reser = new Reserva();
+        
         reser.setVisible(true);
         dispose();
         reser.resetTab();
