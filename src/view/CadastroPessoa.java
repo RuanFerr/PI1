@@ -247,7 +247,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         dispose();
 
         regRes.resetTab();
-        
+
     }//GEN-LAST:event_regReservaActionPerformed
 
     private void addPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPessoaActionPerformed
@@ -256,7 +256,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
             if (testeEmail()) {
 
-                if (testaCPF()) {
+                if (testaCPF() && Pessoa.testCPF(cpf.getText())) {
 
                     DefaultTableModel dtm = (DefaultTableModel) tabPessoa.getModel();
 
@@ -333,7 +333,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "CPF digitado é incorretamente");
+                    JOptionPane.showMessageDialog(null, "CPF inválido");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Email já cadastrado");
@@ -347,73 +347,88 @@ public class CadastroPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_addPessoaActionPerformed
 
     private void updatePessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePessoaActionPerformed
+        //if entrada
 
         if (tabPessoa.getSelectedRow() != -1) {
 
-            Object[] opcoes = {"Confirmar", "Cancelar"};
+            if (testaCampos()) {
 
-            if (JOptionPane.showOptionDialog(null, "Deleja alterar este registro?", "Alterar Registro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
+                if (testeEmail()) {
 
-                Pessoa pessoa = new Pessoa();
+                    if (testaCPF() && Pessoa.testCPF(cpf.getText())) {
+                        Object[] opcoes = {"Confirmar", "Cancelar"};
 
-                switch ((String) cargo.getSelectedItem()) {
-                    case "Funcionario":
+                        if (JOptionPane.showOptionDialog(null, "Deleja alterar este registro?", "Alterar Registro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
 
-                        pessoa = new Funcionario();
+                            Pessoa pessoa = new Pessoa();
 
-                        pessoa.setNome(nome.getText());
-                        pessoa.setSobrenome(sobrenome.getText());
-                        pessoa.setCpf(Integer.parseInt(cpf.getText()));
-                        pessoa.setCargo((String) cargo.getSelectedItem());
-                        pessoa.setEmail(email.getText());
-                        pessoa.setSenha(senha.getText());
+                            switch ((String) cargo.getSelectedItem()) {
+                                case "Funcionario":
 
-                        break;
-                    case "Gerente":
+                                    pessoa = new Funcionario();
 
-                        pessoa = new Gerente();
+                                    pessoa.setNome(nome.getText());
+                                    pessoa.setSobrenome(sobrenome.getText());
+                                    pessoa.setCpf(Integer.parseInt(cpf.getText()));
+                                    pessoa.setCargo((String) cargo.getSelectedItem());
+                                    pessoa.setEmail(email.getText());
+                                    pessoa.setSenha(senha.getText());
 
-                        pessoa.setNome(nome.getText());
-                        pessoa.setSobrenome(sobrenome.getText());
-                        pessoa.setCpf(Integer.parseInt(cpf.getText()));
-                        pessoa.setCargo((String) cargo.getSelectedItem());
-                        pessoa.setEmail(email.getText());
-                        pessoa.setSenha(senha.getText());
+                                    break;
+                                case "Gerente":
 
-                        break;
+                                    pessoa = new Gerente();
 
-                    case "Usuario":
+                                    pessoa.setNome(nome.getText());
+                                    pessoa.setSobrenome(sobrenome.getText());
+                                    pessoa.setCpf(Integer.parseInt(cpf.getText()));
+                                    pessoa.setCargo((String) cargo.getSelectedItem());
+                                    pessoa.setEmail(email.getText());
+                                    pessoa.setSenha(senha.getText());
 
-                        pessoa = new Usuario();
+                                    break;
 
-                        pessoa.setNome(nome.getText());
-                        pessoa.setSobrenome(sobrenome.getText());
-                        pessoa.setCpf(Integer.parseInt(cpf.getText()));
-                        pessoa.setCargo((String) cargo.getSelectedItem());
-                        pessoa.setEmail(email.getText());
-                        pessoa.setSenha(senha.getText());
+                                case "Usuario":
 
-                        break;
+                                    pessoa = new Usuario();
 
+                                    pessoa.setNome(nome.getText());
+                                    pessoa.setSobrenome(sobrenome.getText());
+                                    pessoa.setCpf(Integer.parseInt(cpf.getText()));
+                                    pessoa.setCargo((String) cargo.getSelectedItem());
+                                    pessoa.setEmail(email.getText());
+                                    pessoa.setSenha(senha.getText());
+
+                                    break;
+
+                            }
+
+                            control.login.Login.getGrpPessoa().set(tabPessoa.getSelectedRow(), pessoa);
+
+                            String[] pssrow = {pessoa.getNome(), pessoa.getSobrenome(), ("" + pessoa.getCpf()), pessoa.getCargo(), pessoa.getEmail(), pessoa.getSenha()};
+
+                            for (int i = 0; i < tabPessoa.getColumnCount(); i++) {
+
+                                tabPessoa.setValueAt(pssrow[i], tabPessoa.getSelectedRow(), i);
+
+                            }
+
+                        } else {
+                            
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "CPF INVÁLIDO");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Email já cadastrado");
                 }
-
-                control.login.Login.getGrpPessoa().set(tabPessoa.getSelectedRow(), pessoa);
-
-                String[] pssrow = {pessoa.getNome(), pessoa.getSobrenome(), ("" + pessoa.getCpf()), pessoa.getCargo(), pessoa.getEmail(), pessoa.getSenha()};
-
-                for (int i = 0; i < tabPessoa.getColumnCount(); i++) {
-
-                    tabPessoa.setValueAt(pssrow[i], tabPessoa.getSelectedRow(), i);
-
-                }
-
             } else {
+                JOptionPane.showMessageDialog(null, "Deve-se preencher todos os campos");
             }
-
         } else {
             JOptionPane.showMessageDialog(null, "Selecione registro para alterar.");
-        }
 
+        }
     }//GEN-LAST:event_updatePessoaActionPerformed
 
     private void tabPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPessoaMouseClicked
@@ -548,7 +563,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         boolean test;
         try {
             long num = Long.parseLong(cpf.getText());
-            
+
             test = true;
             System.out.println(cpf.getText().length());
             if (cpf.getText().length() != 11) {

@@ -5,6 +5,7 @@
  */
 package view;
 
+import control.cadastro.Pessoa;
 import control.reserva.Equipamento;
 import static control.reserva.Reserva.reservas;
 import java.awt.HeadlessException;
@@ -291,7 +292,7 @@ public class Reserva extends javax.swing.JFrame {
                 String data = (btnDia.getSelectedItem() + "/" + btnMes.getSelectedItem() + "/" + btnAno.getSelectedItem());
 
                 if (control.reserva.Reserva.testarData(data)) {
-                    if (testaCpfNumeros()) {
+                    if (testaCpfNumeros() && Pessoa.testCPF(CpfResp.getText())) {
                         Equipamento equip = CadastroEquipamento.itens.get(cxEquip.getSelectedIndex());
 
                         String item = (String) cxEquip.getSelectedItem();
